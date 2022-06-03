@@ -1,7 +1,7 @@
 const Dog = require('../models/dogModel.js')
 const dogs = {}
 
-
+//Lista los perros de la base de datos
 dogs.getDogs = async (req, res) => {
     const dogs = await Dog.find()
     res.json(dogs)
