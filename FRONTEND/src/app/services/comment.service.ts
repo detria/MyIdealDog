@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Comment } from '../models/comment'
 
@@ -14,7 +14,21 @@ export class CommentService {
   constructor(private http: HttpClient) { }
 
   getComments() {
-    return this.http.get<Comment[]>(this.URL_API+"/list")
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'token': localStorage.getItem('token') || '{}'
+      })
+    };
+    return this.http.get<Comment[]>(this.URL_API+"/list",httpOptions)
+
+  }
+  getCommentsByUser() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'token': localStorage.getItem('token') || '{}'
+      })
+    };
+    return this.http.get<Comment[]>(this.URL_API+"/listByUser",httpOptions)
 
   }
 

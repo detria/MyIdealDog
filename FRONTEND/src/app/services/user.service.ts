@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import {User} from '../models/user'
 import { CookieService } from "ngx-cookie-service";
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -25,10 +26,16 @@ export class UserService {
 
   constructor(private http: HttpClient,private cookies:CookieService) { }
 
-  getUsers() {
-    return this.http.get<User[]>(this.URL_API+"/list")
+  getUsers() {  
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'token': localStorage.getItem('token') || '{}'
+      })
+    };
+    return this.http.get<User[]>(this.URL_API+"/list",httpOptions)
 
   }
+  
 
   createUser(user:User){
     return this.http.post(this.URL_API,user)
