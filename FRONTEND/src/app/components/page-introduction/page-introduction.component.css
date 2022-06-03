@@ -1,0 +1,44 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Barlow+Condensed:wght@100&family=Londrina+Solid&family=Patrick+Hand&family=Roboto+Flex:opsz,wght@8..144,300&family=Rokkitt:wght@100&display=swap');
+
+:host {
+    background-image: url(/assets/imgs/fondoBlanco.jpg);
+    display: block;
+    height: 100vh;
+    background-size: cover;
+    width: auto;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    font-weight: bold;
+    
+  }
+  .carousel-inner{
+    width: 100vw;
+  }
+  #imgCuestionario{
+      height: 400px;
+      
+  }
+  img{
+    display: block;
+      height: 100vh;
+      background-size: cover;
+      width: auto;
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+  }
+  
+  p{
+    font-size: 25px;
+    color: black;
+    font-weight: bold;
+    font-family: 'Barlow Condensed', sans-serif;
+    
+  }
+  
+  h2{
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
+    font-family: 'Barlow Condensed', sans-serif;
+  }

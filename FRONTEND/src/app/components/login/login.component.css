@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Boogaloo&family=Gorditas&family=Lobster&family=Monoton&family=Oleo+Script&family=Playfair+Display:ital@1&display=swap');
+
+:host {
+  background-image: url(/assets/imgs/login1.jpg);
+  display: block;
+  height: 100vh;
+  background-size: cover;
+  width: auto;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  font-weight: bold;
+}
+
+
+.container {
+  
+  height: 100%;
+  align-content: center;
+  
+}
+
+.form-control{
+  color: rgb(0, 0, 0);
+  background-color: rgba(255, 255, 255, 0.29);
+}
+
+
+
+.card {
+  /*background-image: url(/assets/imgs/fondoPeque.png);*/
+  background-color: #ffffff2a;
+  height: 400px;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-family: 'Oleo';
+  font-size: 18px;
+  width: 450px;
+  box-shadow:0 0 20px 4px rgb(0, 0, 0);
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: black;
+}
+
+.social_icon span {
+  font-size: 60px;
+  margin-left: 10px;
+  color: #e37dd6;
+}
+
+.social_icon span:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.card-header h3 {
+  color: white;
+}
+
+.social_icon {
+  position: absolute;
+  right: 20px;
+  top: -45px;
+}
+
+.input-group-prepend span {
+  width: 50px;
+  background-color: #ffffff;
+  color: black;
+  border: 0;
+}
+
+input:focus {
+  outline: 0 0 0 0;
+  box-shadow: 0 0 0 0;
+
+}
+
+
+
+.remember {
+  color: rgb(0, 0, 0);
+}
+
+.remember input {
+  width: 20px;
+  height: 20px;
+  margin-left: 15px;
+  margin-right: 5px;
+}
+
+.login_btn {
+  color: rgb(0, 0, 0);
+  background-color: #fffdfd7e;
+  width: 100px;
+  font-size: large;
+  font-weight: bold;
+}
+
+.login_btn:hover {
+  color: black;
+  background-color: white;
+}
+
+.links {
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+}
+
+.links a {
+  margin-left: 4px;
+}
+
+a {
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+}
+
+a:hover {
+  color: rgb(255, 255, 255);
+}
+
+#signin{
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+}

@@ -1,0 +1,75 @@
+import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../services/user.service';
+import Swal from 'sweetalert2'
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+
+declare var require: any
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent implements OnInit {
+
+  constructor(public userService: UserService, private router: Router) { }
+
+  email: string = ""
+  password: string = ""
+
+  ngOnInit(): void { }
+
+  loginUser() {
+    this.userService.loginUser({
+      email: this.email,
+      password: this.password
+    }).subscribe(
+      async res => {
+        console.log(res)
+        const resp:any=res;
+        if (res) {
+          Swal.fire({
+            title: 'El inicio de sesión se ha realizado correctamente!',
+            text: '',
+            background: 'url(assets/imgs/login1.jpg)',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: 'black',
+          }).then(() => {
+            localStorage.setItem('token',resp.token);
+            if (resp.user.role == "admin") {
+              this.router.navigate(['/admin']);
+            } else {
+              this.router.navigate(['/searcher']);
+            }
+          })
+        } else {
+          console.log("errorr")
+          Swal.fire({
+            title: 'Error!',
+            text: 'Datos incorrectos',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          })
+
+        }
+
+      },
+      err => {
+        console.log(err)
+        Swal.fire({
+          title: 'Error!',
+          text: 'Datos incorrectos',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        })
+      }
+
+    );
+
+  }
+
+}
+
+

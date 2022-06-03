@@ -1,0 +1,50 @@
+.col-4 {
+    background-color: rgb(46, 46, 79);
+    align-items: center;
+    align-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.col-8 {
+    background-color: rgb(118, 118, 150);
+    
+}
+
+img{
+    max-width: 200px;
+    align-self: center;
+    padding-top: 30px;
+    width: 100%;
+    height: auto;
+}
+
+.card{
+    height: 100%;
+    padding-bottom: 70px;
+}
+.card-body{
+    padding-top: 35px;
+}
+
+h2{
+    padding-bottom: 80px;
+    text-align: center;
+    color:  rgb(118, 118, 165);
+}
+button{
+    background-color:  rgb(118, 118, 165);
+    width: 100%;
+}
+.row{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    margin-right: 0px;
+}
+.container{
+    width: 100vw;
+    height: 100vh;
+    position: absolute; 
+    padding-right: 0px;
+}

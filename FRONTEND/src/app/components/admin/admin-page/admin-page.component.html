@@ -1,0 +1,41 @@
+<html>
+    <header>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <button type="button" class="btn btn-dark" id="botonVolver" routerLink="/login">Salir de la sesión</button>
+        </li>
+        <li class="nav-item">
+            <button type="button" class="btn btn-dark" (click)="obtenerUsuarios()">Usuarios</button>
+        </li>
+        <li class="nav-item">
+           <!--<button type="button" class="btn btn-dark" (click)="obtenerPerros()">Perros</button>-->
+        </li>
+      </ul>
+      <table >
+          <tbody *ngFor="let user of users">
+            <td>{{user.name}}</td>
+            <td>{{user.lastname}}</td>
+            <td>{{user.email}}</td>
+          <td><button type="button" class="btn btn-danger">Eliminar</button></td>
+          <td><button type="button" class="btn btn-warning">Modificar</button></td>
+          </tbody>
+      </table><!--
+      <table >
+        <tbody *ngFor="let dog of dogs">
+          <td>{{dog.breed}}</td>
+          <td>{{dog.description}}</td>
+          <td><button type="button" class="btn btn-danger">Eliminar</button></td>
+          <td><button type="button" class="btn btn-warning">Modificar</button></td>
+        </tbody>
+        
+    
+    </table>-->
+    <div class="container" id="d">
+
+    </div>
+</header>
+<body>
+
+</body>
+
+</html>
