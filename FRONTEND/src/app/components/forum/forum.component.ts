@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { map, Observable, startWith } from 'rxjs';
-import { User } from 'src/app/models/user';
 import { Comment } from 'src/app/models/comment';
 import { UserService } from 'src/app/services/user.service';
 import { DogService } from '../../services/dog.service';
 import { Dog } from 'src/app/models/dog';
 import { CommentService } from 'src/app/services/comment.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-forum',
@@ -103,6 +102,10 @@ export class ForumComponent implements OnInit {
 
   capturarRaza() {
     this.seleccion = this.opcionSeleccionada
+  }
+
+  crearPublicacion(){
+    
   }
 
 

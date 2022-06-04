@@ -1,6 +1,6 @@
 export interface Comment{
     topic:string,
-    comment:string,
+    message:string,
     date:string,
     userId:string,
 }

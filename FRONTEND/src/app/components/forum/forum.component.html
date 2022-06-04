@@ -9,6 +9,7 @@
       <nav class="nav">
         <button type="button" class="btn btn-light" (click)="obtenerComentarios2()">Todas las publicaciones</button>
         <button type="button" class="btn btn-light" (click)="obtenerMisComentarios2()">Mis publicaciones</button>
+        <button type="button" class="btn btn-light" routerLink="/createComment">Crear publicacion</button>
       </nav>
       
     </div>
@@ -28,7 +29,7 @@
     <mat-card class="example-card">
         <mat-card-content >
           <mat-card-title>Tema: {{publicacion.topic}}</mat-card-title>
-          <p>Comentario: {{publicacion.comment}}</p>
+          <p>Comentario: {{publicacion.message}}</p>
           <p>Fecha de publicación: {{publicacion.date}}</p>
           <p>Comentario realizado por: {{publicacion.userId}}</p>
         </mat-card-content>

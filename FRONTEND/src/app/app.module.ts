@@ -22,6 +22,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule} from '@angular/forms';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { CreateCommentComponent } from './components/create-comment/create-comment.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +38,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     NavbarForumComponent,
     ForumComponent,
     UserProfileComponent,
+    CreateCommentComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,10 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     FormsModule,
     MatCardModule,
     NoopAnimationsModule,
-    MatAutocompleteModule,MatFormFieldModule,ReactiveFormsModule
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatDialogModule
 
   ],
   providers: [CookieService],

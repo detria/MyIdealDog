@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminPageComponent } from './components/admin/admin-page/admin-page.component';
+import { CreateCommentComponent } from './components/create-comment/create-comment.component';
 import { FormComponent } from './components/form/form.component';
 import { ForumComponent } from './components/forum/forum.component';
 import { LoginComponent } from './components/login/login.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path:'forum',component:ForumComponent},
   {path:'userProfile',component:UserProfileComponent},
   {path:'admin',component:AdminPageComponent},
+  {path:'createComment',component:CreateCommentComponent},
   { path: '**', pathMatch:'full', redirectTo:'introduction' },
 ];
 

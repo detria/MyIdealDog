@@ -32,5 +32,14 @@ export class CommentService {
 
   }
 
+  createComment(comment:Comment){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'token': localStorage.getItem('token') || '{}'
+      })
+    };
+    return this.http.post(this.URL_API,comment,httpOptions)
+  }
+
   
 }

@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Boogaloo&family=Gorditas&family=Lobster&family=Monoton&family=Oleo+Script&family=Playfair+Display:ital@1&display=swap');
+
+
+body,html{
+  background-color: rgb(46, 46, 79);
+  height: 100vh;
+}
+
+
+.container {
+  background-color: rgb(46, 46, 79);
+  height: 100%;
+  align-content: center;
+  
+}
+
+.card {
+  /*background-image: url(/assets/imgs/fondoPeque.png);*/
+  background-color: #ffffff80;
+  height: 200px;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-family: 'Oleo';
+  font-size: 18px;
+  width: 700px;
+  box-shadow:0 0 20px 4px rgb(0, 0, 0);
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: black;
+}
+
