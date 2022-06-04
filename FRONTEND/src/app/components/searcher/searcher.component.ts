@@ -77,7 +77,6 @@ export class SearcherComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerPerros();
-
     this.obtenerPerros2();
   }
 

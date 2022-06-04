@@ -22,8 +22,6 @@ export class UserService {
 
   };
 
-  
-
   constructor(private http: HttpClient,private cookies:CookieService) { }
 
   getUsers() {  
