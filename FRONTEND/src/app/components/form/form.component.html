@@ -4,11 +4,15 @@
 <form id="msform">
   <fieldset id="fieldset">
     <legend id="question">¿Vives en un piso o en una casa?</legend>
-    <div class="container1">
-      <button type="button" class="btn btn-light">Piso</button>
-      <button type="button" class="btn btn-light">Casa</button>
+    <div class="form-check">
+      <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off">
+      <label class="btn btn-outline-primary" for="btn-check-outlined" id="first">Casa</label><br>
     </div>
-    <button type="button" class="btn btn-success">Continuar</button>
+    <div class="form-check">
+      <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off">
+<label class="btn btn-outline-primary" for="btn-check-outlined" id="second">Piso</label><br>
+    </div>
+    <button type="button" class="btn btn-success" (click)="siguientePregunta()">Continuar</button>
   </fieldset>
 
 

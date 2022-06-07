@@ -1,0 +1,102 @@
+<!--<app-navbar></app-navbar>-->
+<html>
+
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="card-body">
+                    <form id="form">
+                        <div class="input-group form-group">
+                            Raza:
+                            <input type="text" name="breed" class="form-control" id="raza"
+                                placeholder="Introduce la raza"  [(ngModel)]="raza">
+                        </div>
+                        <div class="input-group form-group">
+                            Descripción:
+                            <input type="text" name="description" class="form-control" id="descripcion"
+                                placeholder="Introduce una descripción"  [(ngModel)]="descripcion">
+                        </div>
+                        <div class="input-group form-group">
+                            Peso:
+                            <input type="text" name="weight" class="form-control" id="peso"
+                                placeholder="Introduce el peso"  [(ngModel)]="peso" >
+                        </div>
+                        <div class="input-group form-group">
+                            Actividad:
+                            <select class="form-select" name="activity" id="activity"
+                                [(ngModel)]="opcionSeleccionadaActividad" (change)="capturarActividad()"
+                                >
+                                <option value="0">Seleccione el nivel de actividad</option>
+                                <option>baja</option>
+                                <option>media</option>
+                                <option>alta</option>
+                            </select>
+                        </div>
+                        <div class="input-group form-group">
+                            Requerimiento de cuidados:
+                            <select class="form-select" id="care_requirement"
+                                [(ngModel)]="opcionSeleccionadaCuidados" (change)="capturarCuidados()" 
+                                name="care_requirement">
+                                <option value="0">Seleccione el nivel de requerimiento de cuidados</option>
+                                <option>bajo</option>
+                                <option>medio</option>
+                                <option>alto</option>
+                            </select>
+                        </div>
+                        <div class="input-group form-group">
+                            Esperanza de vida:
+                            <input type="text" name="life_expentancy" class="form-control" id="esperanzaVida"
+                                placeholder="Introduce la esperanza de vida"  [(ngModel)]="esperanzaVida">
+                        </div>
+                        <div class="input-group form-group">
+                            Tamaño:
+                            <select class="form-select"  id="tamaño"
+                                [(ngModel)]="opcionSeleccionadaTamanio" (change)="capturarTamanio()" 
+                                name="size">
+                                <option value="0">Seleccione el tamaño</option>
+                                <option>mini</option>
+                                <option>pequeño</option>
+                                <option>mediano</option>
+                                <option>grande</option>
+                            </select>
+                        </div>
+                        <div class="input-group form-group">
+                            Fotos:(MÁX 2)
+                            <input type="text" name="imgs1" class="form-control" id="foto1"
+                                placeholder="Introduce la url de la primera foto"  [(ngModel)]="foto1">
+                            <input type="text" name="imgs2" class="form-control" id="foto2"
+                                placeholder="Introduce la url de la segunda foto"  [(ngModel)]="foto2">
+                        </div>
+                        <div class="input-group form-group">
+                            Tutorial de entrenamiento:
+                            <input type="text" name="tutorial" class="form-control" id="tutorial"
+                                placeholder="Introduce la url del tutorial de entrenamiento"  [(ngModel)]="tutorial">
+                        </div>
+                        <div class="input-group form-group">
+                            Video:
+                            <input type="text" name="video" class="form-control" id="video"
+                                placeholder="Introduce la url del video"  [(ngModel)]="video">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" value="publicar" class="btn btn-success" (click)="crearNuevaRaza()">Crear</button>
+                            <button type="submit" value="publicar" class="btn btn-success" (click)="editarPerro()">Editar</button>
+                            <button type="submit" value="cancelar" class="btn btn-danger"
+                                routerLink="/admin">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

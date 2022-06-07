@@ -24,6 +24,10 @@ import { ReactiveFormsModule} from '@angular/forms';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { CreateCommentComponent } from './components/create-comment/create-comment.component';
+import { CreateEditDogComponent } from './components/create-edit-dog/create-edit-dog.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +43,8 @@ import { CreateCommentComponent } from './components/create-comment/create-comme
     ForumComponent,
     UserProfileComponent,
     CreateCommentComponent,
+    CreateEditDogComponent,
+    EditUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +56,8 @@ import { CreateCommentComponent } from './components/create-comment/create-comme
     MatAutocompleteModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatExpansionModule
 
   ],
   providers: [CookieService],

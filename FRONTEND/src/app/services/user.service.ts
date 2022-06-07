@@ -12,6 +12,14 @@ export class UserService {
   URL_API = 'http://localhost:3000/user'
 
   users:User[]=[];
+
+  user:User={
+    name: '',
+    lastname: '',
+    email: '',
+    password: '',
+    role: 'user'
+  }
   
   userRegister:User={
     name:"",
@@ -34,9 +42,16 @@ export class UserService {
 
   }
   
-
   createUser(user:User){
     return this.http.post(this.URL_API,user)
+  }
+
+  deleteUser(email:string){
+    return this.http.delete(this.URL_API+"/delete/"+email)
+  }
+
+  deleteUserById(id:string){
+    return this.http.delete(this.URL_API+"/"+id)
   }
 
   getUserByEmail(email:string){
@@ -45,6 +60,28 @@ export class UserService {
 
   loginUser(user: any) {
     return this.http.post(this.URL_API+"/login", user);
+  }
+
+  editUser(user:User){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'token': localStorage.getItem('token') || '{}'
+      })
+    };
+    return this.http.put(this.URL_API+"/",user,httpOptions)
+  }
+
+  getUserById(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'token': localStorage.getItem('token') || '{}'
+      })
+    };
+    return this.http.get<User>(this.URL_API+"/userById",httpOptions)
+  }
+
+  saveDataUser(user:User){
+    this.user=user;
   }
 
 }

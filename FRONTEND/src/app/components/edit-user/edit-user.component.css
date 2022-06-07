@@ -6,6 +6,22 @@ body,html{
   height: 100%;
 }
 
+:host{
+	background-color: rgb(46, 46, 79);
+	display: block;
+	height: 100vh;
+	font-family: Playfair;
+  }
+
+  input{
+    margin-left: 10px;
+  }
+  select{
+    margin-left: 10px;
+  }
+  button{
+    margin: 2px;
+  }
 
 .container {
   background-color: rgb(46, 46, 79);
@@ -17,7 +33,7 @@ body,html{
 .card {
   /*background-image: url(/assets/imgs/fondoPeque.png);*/
   background-color: #ffffff80;
-  height: 200px;
+  height: 300px;
   margin-top: auto;
   margin-bottom: auto;
   font-family: 'Oleo';

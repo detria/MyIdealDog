@@ -1,10 +1,10 @@
 const { Schema, model } = require('mongoose')
 
 const DogSchema = new Schema({
-    breed: { type: String, required: true },
+    breed: { type: String, required: true, unique: true},
     description: { type: String, required: true },
     size: { type: String, required: true },
-    weight: { type: String, required: true, unique: true },
+    weight: { type: String, required: true},
     activity: { type: String, required: true },
     care_requirement: { type: String, required: true },
     life_expectancy :{ type: String, required: true},

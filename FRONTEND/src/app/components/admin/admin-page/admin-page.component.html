@@ -1,41 +1,46 @@
 <html>
-    <header>
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <button type="button" class="btn btn-dark" id="botonVolver" routerLink="/login">Salir de la sesión</button>
-        </li>
-        <li class="nav-item">
-            <button type="button" class="btn btn-dark" (click)="obtenerUsuarios()">Usuarios</button>
-        </li>
-        <li class="nav-item">
-           <!--<button type="button" class="btn btn-dark" (click)="obtenerPerros()">Perros</button>-->
-        </li>
-      </ul>
-      <table >
-          <tbody *ngFor="let user of users">
-            <td>{{user.name}}</td>
-            <td>{{user.lastname}}</td>
-            <td>{{user.email}}</td>
-          <td><button type="button" class="btn btn-danger">Eliminar</button></td>
-          <td><button type="button" class="btn btn-warning">Modificar</button></td>
-          </tbody>
-      </table><!--
-      <table >
-        <tbody *ngFor="let dog of dogs">
-          <td>{{dog.breed}}</td>
-          <td>{{dog.description}}</td>
-          <td><button type="button" class="btn btn-danger">Eliminar</button></td>
-          <td><button type="button" class="btn btn-warning">Modificar</button></td>
-        </tbody>
-        
-    
-    </table>-->
-    <div class="container" id="d">
 
-    </div>
-</header>
 <body>
+  <button type="button" class="btn btn-dark" id="botonVolver" (click)="cerrarSesion()">❌ Salir de la sesión</button>
+  <div class="container">
+    <h3>Usuarios registrados</h3>
+    <table class="table" id="tableUsers">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellidos</th>
+          <th scope="col">Email</th>
+          <th scope="col"> </th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let user of users">
+        <td id="name" [contentEditable]="editable">{{user.name}}</td>
+        <td id="lastname" [contentEditable]="editable">{{user.lastname}}</td>
+        <td id="email" [contentEditable]="editable">{{user.email}}</td>
+        <td><button type="button" class="btn btn-danger" (click)="eliminarUsuario(user.email)">✘ Eliminar</button></td>
+      </tbody>
+    </table>
 
+    <h3>Razas de perros registradas 🐕</h3>
+    <table class="table" id="tableDogs">
+      <thead>
+        <tr>
+          <th scope="col">Raza</th>
+          <th scope="col">Descripcion</th>
+          <th scope="col"> </th>
+          <th scope="col"> </th>
+          <th scope="col"> </th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let dog of dogs">
+        <td id="name">{{dog.breed}}</td>
+        <td id="lastname">{{dog.description}}</td>
+        <td><button type="button" class="btn btn-danger" (click)="eliminarPerro(dog.breed)">✘ Eliminar</button></td>
+        <td><button type="button" class="btn btn-warning" (click)="modificarPerro(dog.breed)">✎ Modificar</button></td>
+      </tbody>
+    </table>
+    <td><button type="button" class="btn btn-success" (click)="aniadirRaza()">Añadir una nueva raza</button></td>
+  </div>
 </body>
 
 </html>

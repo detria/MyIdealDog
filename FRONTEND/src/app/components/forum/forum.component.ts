@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Comment } from 'src/app/models/comment';
-import { UserService } from 'src/app/services/user.service';
 import { DogService } from '../../services/dog.service';
 import { Dog } from 'src/app/models/dog';
 import { CommentService } from 'src/app/services/comment.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 
 @Component({
@@ -14,7 +12,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 })
 export class ForumComponent implements OnInit {
 
-  constructor(public dogService: DogService, public userService: UserService, public commentsService: CommentService) { }
+  constructor(public dogService: DogService, public commentsService: CommentService) { }
 
   dogs: Dog[] = []
   breeds: string[] = []

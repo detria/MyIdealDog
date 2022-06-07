@@ -1,5 +1,6 @@
 const  jwt =require( "jsonwebtoken");
-const validateToken = (req, res, next) => {
+const validate={}
+validate.validateToken = (req, res, next) => {
     const accessToken = req.headers.token;
     if (!accessToken){
         res.status(400).send('Access denied');
@@ -15,4 +16,25 @@ const validateToken = (req, res, next) => {
     }
 };
 
-module.exports=validateToken;
+validate.validateAdmin = (req, res, next) => {
+    const accessToken = req.headers.token;
+    if (!accessToken){
+        res.status(400).send('Access denied');
+    } else {
+        jwt.verify(accessToken, 'your_secret_key', (err, user) => {
+            if(err){
+                res.status(400).send('Access denied, token expired or incorrect');
+            } else {
+                res.user = user;
+                if(user.userFound.role === "admin"){
+                    next();
+                }else{
+                    res.status(400).send('Access denied, the user is not the admin');
+                }
+                
+            }
+        });
+    }
+};
+
+module.exports=validate;

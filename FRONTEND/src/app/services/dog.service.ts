@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Dog } from '../models/dog'
 
 @Injectable({
@@ -9,7 +9,21 @@ export class DogService {
 
   URL_API = 'http://localhost:3000/dog'
 
+  create:boolean=true;
   dogs: Dog[] = [];
+
+  dog:Dog={
+    breed: '',
+    description: '',
+    weight: '',
+    activity: '',
+    care_requirement: '',
+    life_expectancy: '',
+    imgs: [],
+    trainingTutorial: '',
+    video: '',
+    size: ''
+  }
 
   constructor(private http: HttpClient) { }
 
@@ -22,7 +36,42 @@ export class DogService {
   }
 
   createDog(dog: Dog) {
-    return this.http.post(this.URL_API, dog)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'token': localStorage.getItem('token') || '{}'
+      })
+    };
+    return this.http.post(this.URL_API,dog,httpOptions)
   }
+
+  deleteDog(breed:string){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'token': localStorage.getItem('token') || '{}'
+      })
+    };
+    return this.http.delete(this.URL_API+"/"+breed,httpOptions)
+  }
+
+  editDog(breed:string,dog:Dog){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'token': localStorage.getItem('token') || '{}'
+      })
+    };
+    return this.http.put(this.URL_API+"/"+breed,dog,httpOptions)
+  }
+
+  saveDataDog(dog:Dog){
+    this.dog=dog
+  }
+
+  /**Dependiendo si quieres crear una nueva raza o editar una que ya existe pasas un parametro u otro */
+  createOrEdit(edit:boolean){
+    //si es true es crear // si es false es editar
+    this.create=edit
+  }
+
+  
 
 }

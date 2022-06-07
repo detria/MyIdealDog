@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminPageComponent } from './components/admin/admin-page/admin-page.component';
 import { CreateCommentComponent } from './components/create-comment/create-comment.component';
+import { CreateEditDogComponent } from './components/create-edit-dog/create-edit-dog.component';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { FormComponent } from './components/form/form.component';
 import { ForumComponent } from './components/forum/forum.component';
 import { LoginComponent } from './components/login/login.component';
@@ -20,7 +22,10 @@ const routes: Routes = [
   {path:'userProfile',component:UserProfileComponent},
   {path:'admin',component:AdminPageComponent},
   {path:'createComment',component:CreateCommentComponent},
+  {path:'createEditDog',component:CreateEditDogComponent},
+  {path:'editUser',component:EditUserComponent},
   { path: '**', pathMatch:'full', redirectTo:'introduction' },
+
 ];
 
 @NgModule({

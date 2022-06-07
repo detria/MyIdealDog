@@ -33,7 +33,7 @@ export class CreateCommentComponent implements OnInit {
   createComment(){
     const comment:Comment={
       topic:this.topic,
-      message:this.message,
+      comment:this.message,
       date:"04/06/2022",
       userId:""
     }

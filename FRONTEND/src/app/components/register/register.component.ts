@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import {FormsModule, NgForm} from '@angular/forms'
 import Swal from 'sweetalert2'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +11,7 @@ import Swal from 'sweetalert2'
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(public userService:UserService) { }
+  constructor(public userService:UserService,private router:Router) { }
 
   ngOnInit(): void {
     
@@ -30,6 +31,7 @@ export class RegisterComponent implements OnInit {
       confirmButtonText: 'OK'
     }).then(() =>{
       form.reset();
+      this.router.navigate(['/login'])
     })
     
   }

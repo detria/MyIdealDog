@@ -27,6 +27,15 @@ users.getUserByEmail = async (req, res) => {
   }
 }
 
+users.getUserById = async (req, res) => {
+  try {
+    const user = await User.findById(res.user.userFound._id)
+    res.json(user)
+  } catch (error) {
+    res.status(404).json({ message: "Usuario no encontrado" })
+  }
+}
+
 users.loginUser = async (req, res) => {
 
   const JWT_Secret = 'your_secret_key';
@@ -37,7 +46,7 @@ users.loginUser = async (req, res) => {
     const userFound = await User.findOne({ email: emailReq });
     if (userFound) {
       if (await bcrypt.compare(password, userFound.password)) {
-        const token = jwt.sign({userFound}, JWT_Secret, {expiresIn: 604800});
+        const token = jwt.sign({ userFound }, JWT_Secret, { expiresIn: 604800 });
         return res.status(200).send({
           user: userFound,
           token: token
@@ -62,8 +71,17 @@ users.deleteUser = async (req, res) => {
   await User.findByIdAndDelete(req.params.id)
   res.json({ status: "Usuario eliminado con exito" })
 }
+
+users.deleteUserEmail = async (req, res) => {
+  console.log(req.params.email)
+  await User.findOneAndDelete({email:req.params.email})
+  console.log("eliminado")
+  res.json({ status: "Usuario eliminado con exito" })
+}
+
 users.editUser = async (req, res) => {
-  await User.findByIdAndUpdate(req.params.id, req.body)
+  console.log("hola")
+  await User.findOneAndUpdate({_id:res.user.userFound._id},req.body)
   res.json({ status: "Usuario modificado con exito" })
 }
 
