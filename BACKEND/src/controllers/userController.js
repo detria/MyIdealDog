@@ -80,8 +80,12 @@ users.deleteUserEmail = async (req, res) => {
 }
 
 users.editUser = async (req, res) => {
-  console.log("hola")
-  await User.findOneAndUpdate({_id:res.user.userFound._id},req.body)
+  const bcrypt = require("bcryptjs");
+  var rondas = 10;
+  const contraseñaEncriptada = await bcrypt.hash(req.body.password, rondas);
+  req.body.password=contraseñaEncriptada
+  const userFound=await User.findOneAndUpdate({_id:res.user.userFound._id},req.body)
+  
   res.json({ status: "Usuario modificado con exito" })
 }
 

@@ -12,7 +12,7 @@ import Swal from 'sweetalert2'
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(private userService: UserService,private router:Router) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   user: User = {
     _id: "",
@@ -27,12 +27,12 @@ export class UserProfileComponent implements OnInit {
     this.obtenerUsuarioLogeado()
   }
 
-  cambiarDatos(){
+  cambiarDatos() {
     this.userService.saveDataUser(this.user)
     this.router.navigate(['/editUser'])
   }
 
-  eliminarCuenta(email:string) {
+  eliminarCuenta(email: string) {
     Swal.fire({
       title: '¿Estás seguro de querer eliminar este usuario?',
       text: "No podrás volver atrás!",
@@ -60,7 +60,7 @@ export class UserProfileComponent implements OnInit {
         )
       }
     })
-   }
+  }
 
   async obtenerUsuarioLogeado() {
     const user = await this.userService.getUserById()

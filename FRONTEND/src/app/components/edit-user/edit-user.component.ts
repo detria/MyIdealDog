@@ -35,7 +35,7 @@ export class EditUserComponent implements OnInit {
       name: this.nombre,
       lastname: this.apellidos,
       email: this.email,
-      password: this.apellidos,
+      password: this.contrasenia,
       role: 'user'
     }
     Swal.fire({

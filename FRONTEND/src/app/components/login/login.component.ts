@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 
 declare var require: any
 
