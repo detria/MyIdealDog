@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
           Swal.fire({
             title: 'El inicio de sesión se ha realizado correctamente!',
             text: '',
-            background: 'url(assets/imgs/login1.jpg)',
             icon: 'success',
             confirmButtonText: 'OK',
             confirmButtonColor: 'black',

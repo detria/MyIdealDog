@@ -62,6 +62,9 @@ export class CreateEditDogComponent implements OnInit {
     this.seleccionCuidados = this.opcionSeleccionadaCuidados;
   }
 
+  /**
+   * Recoge las propiedades escritar por el administrador y con ellas se crea una nueva raza de perro.
+   */
   crearNuevaRaza() {
     let imgs: string[] = [this.foto1, this.foto2]
     let dog: Dog = {
@@ -79,7 +82,7 @@ export class CreateEditDogComponent implements OnInit {
     this.dogService.createDog(dog).subscribe(
       res => {
         Swal.fire({
-          title: 'El perro se ha creado correctamente!',
+          title: 'Se ha creado una nueva raza!',
           text: '',
           background: 'url(assets/imgs/login1.jpg)',
           icon: 'success',
@@ -94,6 +97,9 @@ export class CreateEditDogComponent implements OnInit {
 
   }
 
+  /**
+   * Dependiendo si estas creando una raza o editando una ejecuta una serie de instrucciones u otras.
+   */
   guardarCambios() {
     if (this.dogService.create === false) {
       console.log(this.dogService.create)
@@ -104,6 +110,9 @@ export class CreateEditDogComponent implements OnInit {
     }
   }
 
+  /**
+   * Carga las características de la raza de perro que en la anterior ventana se escogió editar.
+   */
   async cargarRazaEditar() {
     let dog: Dog = await this.dogService.dog
     this.raza = dog.breed
@@ -119,6 +128,9 @@ export class CreateEditDogComponent implements OnInit {
     this.peso = dog.weight
   }
 
+  /**
+   * Recoge todas las propiedades y si se editó alguna guarda la raza editada
+   */
   editarPerro() {
     let dog: Dog = {
       breed: this.raza,

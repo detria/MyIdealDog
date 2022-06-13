@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Dog } from 'src/app/models/dog';
+import { DogService } from 'src/app/services/dog.service';
 
+import Swal from 'sweetalert2'
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -7,64 +10,149 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dogsService: DogService) { }
 
-  numVecesSiguiente: number = 0;
-  seleccion: string = ""
-  respuestas:String[]=[]
+  estadoVivienda: string = ""
+  estadoCuidados: string = ""
+  estadoHorario: string = ""
+  estadoExperiencia: string = ""
+  estadoFamiliar: string = ""
+  perros: Dog[] = []
+  perrosAfines: Dog[] = []
+
+  vivienda: boolean = true;
+
   ngOnInit(): void {
+    this.obtenerPerros()
   }
 
-  siguientePregunta() {
-    this.numVecesSiguiente++;
-    this.preguntas();
-    console.log(this.seleccion)
-    this.respuestas.push(this.seleccion)
+  async obtenerPerros() {
+    await this.dogsService.getDog().forEach(dog => this.perros = dog)
   }
 
-  private preguntas() {
-    var pregunta = document.getElementById("question");
-    var primeraOpcion = document.getElementById("first");
-    var segundaOpcion = document.getElementById("second");
-
-    var respuestas: string[] = [];
-    switch (this.numVecesSiguiente) {
-      case 1:
-        if (pregunta != null && primeraOpcion != null && segundaOpcion != null) {
-          pregunta.textContent = "¿Has tenido algún otro perro anteriormente?";
-          primeraOpcion.textContent = "Si";
-          segundaOpcion.textContent = "No";
-        }
-        break;
-      case 2:
-        if (pregunta != null && primeraOpcion != null && segundaOpcion != null) {
-          pregunta.textContent = "¿Cuanto tiempo libre tienes para dedicar a tu mascota?";
-          primeraOpcion.textContent = "Entre 1h y media y 3h diarias";
-          segundaOpcion.textContent = "Menos de 1h y media";
-        }
-        break;
-      case 3:
-        if (pregunta != null && primeraOpcion != null && segundaOpcion != null) {
-          pregunta.textContent = "¿Necesitas un acompañante muy activo o más calmado?";
-          primeraOpcion.textContent = "Activo";
-          segundaOpcion.textContent = "Calmado";
-        }
-        break;
-      case 4:
-        if (pregunta != null && primeraOpcion != null && segundaOpcion != null) {
-          pregunta.textContent = "¿Tienes niños en casa?";
-          primeraOpcion.textContent = "Si";
-          segundaOpcion.textContent = "No";
-        }
-        break;
-      case 5:
-        if (pregunta != null && primeraOpcion != null && segundaOpcion != null) {
-          pregunta.textContent = "¿Podrías permitirte una raza que requiera muchos cuidados?";
-          primeraOpcion.textContent = "Si";
-          segundaOpcion.textContent = "No";
-        }
-        break;
-
+  async finalizar() {
+    var listaAfines = await this.asignarRazaAfin()
+    if (listaAfines.length === 0) {
+      Swal.fire({
+        title: '¡Lo sentimos, no hemos podido encontrar una raza que se adapte a ti!',
+        text: '',
+        background: 'url(assets/imgs/login1.jpg)',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        confirmButtonColor: 'black'
+      })
+      this.resetearFormulario()
+    } else {
+      Swal.fire({
+        title: '¡Estas son las razas que hemos visto que mas se adaptan a ti!',
+        text: "",
+        background: 'url(assets/imgs/login1.jpg)',
+        icon: 'success',
+        confirmButtonText: 'OK',
+        confirmButtonColor: 'black'
+      })
+      this.resetearFormulario()
     }
+
   }
+
+  resetearFormulario() {
+    var resetForm = <HTMLFormElement>document.getElementById('form');
+    resetForm.reset();
+  }
+
+  /**
+   * Método que asigna una raza al usuario logeado una vez complete el cuestionario, recoge los resultados marcados en el formulario y según estos va filtrando para encontrar una raza que se adapte a las preferencias y características del usuario
+   * @returns devuelve una lista con las razas encontradas más afines al usuario(si no se encuentra ninguna se devolverá vacío)
+   */
+  asignarRazaAfin(): any {
+    if (this.estadoCuidados == "" || this.estadoExperiencia == "" || this.estadoFamiliar == "" || this.estadoHorario == "" || this.estadoVivienda == "") {
+      Swal.fire({
+        title: '¡Debe marcar todas las opciones para poder continuar!',
+        text: '',
+        background: 'url(assets/imgs/login1.jpg)',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        confirmButtonColor: 'black'
+      }).then(() => {
+        this.resetearFormulario()
+      })
+    } else {
+      if (this.estadoVivienda == "piso") {
+        this.perros.filter(e => e.size === 'mini').forEach(perro => this.perrosAfines.push(perro));
+        this.obtenerPerros()
+        this.perros.filter(e => e.size === 'pequeño').forEach(perro => this.perrosAfines.push(perro));
+      } else {
+        this.perros.filter(e => e.size === 'mediano').forEach(perro => this.perrosAfines.push(perro));
+        this.obtenerPerros()
+        this.perros.filter(e => e.size === 'grande').forEach(perro => this.perrosAfines.push(perro));
+      }
+
+      if (this.estadoFamiliar === 'si') {
+        let aux: Dog[] = []
+        this.perrosAfines.filter(e => e.activity === 'baja').forEach(perro => aux.push(perro));
+        this.perrosAfines.filter(e => e.activity === 'media').forEach(perro => aux.push(perro));
+        this.perrosAfines = aux
+      } else if (this.estadoFamiliar === 'no') {
+        this.perrosAfines = this.perrosAfines.filter(e => e.activity === 'alta')
+      }
+
+      if (this.estadoHorario === '1') {
+        this.perrosAfines = this.perrosAfines.filter(e => e.activity === 'baja');
+      } else if (this.estadoHorario === '12') {
+        let aux: Dog[] = []
+        this.perrosAfines.filter(e => e.activity === 'media').forEach(perro => aux.push(perro));
+        this.perrosAfines.filter(e => e.activity === 'baja').forEach(perro => aux.push(perro));
+        this.perrosAfines = aux
+      } else if (this.estadoHorario === '2') {
+        let aux: Dog[] = []
+        this.perrosAfines.filter(e => e.activity === 'alta').forEach(perro => aux.push(perro));
+        this.perrosAfines.filter(e => e.activity === 'baja').forEach(perro => aux.push(perro));
+        this.perrosAfines.filter(e => e.activity === 'media').forEach(perro => aux.push(perro));
+        this.perrosAfines = aux
+      }
+
+      if (this.estadoExperiencia === 'no') {
+        var aux: Dog[] = []
+        this.perrosAfines.filter(e => e.activity === 'baja').forEach(perro => aux.push(perro));
+        this.perrosAfines.filter(e => e.activity === 'media').forEach(perro => aux.push(perro));
+        this.perrosAfines = aux
+      } else if (this.estadoExperiencia === 'si') {
+        this.perrosAfines = this.perrosAfines.filter(e => e.activity === 'alta')
+      }
+
+      if (this.estadoCuidados === 'no') {
+        var aux: Dog[] = []
+        this.perrosAfines.filter(e => e.care_requirement === 'bajo').forEach(perro => aux.push(perro));
+        this.perrosAfines.filter(e => e.care_requirement === 'medio').forEach(perro => aux.push(perro));
+        this.perrosAfines = aux
+      } else if (this.estadoCuidados === 'si') {
+        this.perrosAfines = this.perrosAfines.filter(e => e.care_requirement === 'alto')
+      }
+      
+    return this.perrosAfines.filter((ele, pos) => this.perrosAfines.indexOf(ele) == pos);
+    }
+    return null;
+  }
+
+  //Metodos para cambiar el estado de las respuestas de los radiobutton
+  cambiarEstadoVivienda(estado: string) {
+    this.estadoVivienda = estado;
+
+  }
+  cambiarEstadoHorario(estado: string) {
+    this.estadoHorario = estado;
+  }
+  cambiarEstadoFamilia(estado: string) {
+    this.estadoFamiliar = estado;
+  }
+  cambiarEstadoCuidados(estado: string) {
+    this.estadoCuidados = estado;
+  }
+  cambiarEstadoExperiencia(estado: string) {
+    this.estadoExperiencia = estado;
+  }
+
 }
+
+

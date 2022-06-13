@@ -45,7 +45,6 @@ export class AdminPageComponent implements OnInit {
             Swal.fire({
               title: 'El usuario se ha eliminado correctamente!',
               text: '',
-              background: 'url(assets/imgs/login1.jpg)',
               icon: 'success',
               confirmButtonText: 'OK',
               confirmButtonColor: 'black',
@@ -125,12 +124,12 @@ export class AdminPageComponent implements OnInit {
 
   }
   async aniadirRaza() {
-    this.dogService.create=true
+    this.dogService.create = true
     this.router.navigate(['/createEditDog']);
   }
 
   async modificarPerro(breed: string) {
-    this.dogService.create=false
+    this.dogService.create = false
     const dogs = await this.dogService.getDogsBy("getByBreed", breed)
     var dogEdit: Dog = {
       breed: '',

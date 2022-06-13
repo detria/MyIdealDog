@@ -2,31 +2,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Barlow+Condensed:wght@100&family=Londrina+Solid&family=Patrick+Hand&family=Roboto+Flex:opsz,wght@8..144,300&family=Rokkitt:wght@100&display=swap');
 .navbar {
   position: fixed;
-  margin-top: 5px;
-  background-color:#f9f9f900;
+  background-color:rgb(255, 255, 255);
   width: 100%;
   height: 8vh;
-  font-weight: bold;
-  
+  font-family: 'Oleo';
 }
 
 button{
   color: black;
 }
 
-#dropdownItems{
-  margin-right: 30px;
-  background-color:#00e8fd;
-  font-size: 14px;
-}
-
-
 /* Asignar color a la barra de nav */
 .navbar li a,
 .navbar .navbar-brand {
   color: #000000;
-  font-size: 21px;
-  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
 }
 
 a {
@@ -40,11 +30,4 @@ a {
   border-radius: 2em;
 }
 
-
-/* Color de activado del link */
-.navbar-nav li.active a {
-  color: rgb(255, 255, 255);
-  background-color: #000000be;
-  border-radius: 2em;
-}
 

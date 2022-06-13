@@ -45,8 +45,6 @@ export class ForumComponent implements OnInit {
     this.breeds = breeds;
     return breeds;
   }
-  //OBTENCIÓN DE LOS PERROS DE LA BASE DE DATOS PARA SACAR LAS RAZAS EX
-
 
   async obtenerComentarios() {
     const comments = await this.commentsService.getComments();
@@ -56,7 +54,7 @@ export class ForumComponent implements OnInit {
   async obtenerComentarios2() {
     const comments = await this.commentsService.getComments();
     comments.forEach(c => this.publicaciones2 = c)
-    this.comentarios=true
+    this.comentarios = true
   }
 
   async obtenerMisComentarios() {
@@ -67,16 +65,16 @@ export class ForumComponent implements OnInit {
   async obtenerMisComentarios2() {
     const comments = await this.commentsService.getCommentsByUser()
     comments.forEach(c => this.publicaciones2 = c)
-    this.comentarios=false
+    this.comentarios = false
   }
 
   quitarFiltro() {
     if (this.comentarios == true) {
       this.obtenerComentarios2()
-      this.opcionSeleccionada='0'
+      this.opcionSeleccionada = '0'
     } else {
       this.obtenerMisComentarios2()
-      this.opcionSeleccionada='0'
+      this.opcionSeleccionada = '0'
     }
   }
 
@@ -102,8 +100,8 @@ export class ForumComponent implements OnInit {
     this.seleccion = this.opcionSeleccionada
   }
 
-  crearPublicacion(){
-    
+  crearPublicacion() {
+
   }
 
 

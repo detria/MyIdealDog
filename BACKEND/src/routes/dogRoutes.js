@@ -1,9 +1,10 @@
 const{Router} =require('express')
 const router=Router()
-const dogsController=require('../controllers/dogController.js')
+const dogsController=require('../controllers/dogController.js');
+const { validateToken } = require('../middleware/validation.js');
 const  validate  = require('../middleware/validation.js');
 
-router.get('/list', dogsController.getDogs);
+router.get('/list',validate.validateToken, dogsController.getDogs);
 router.get('/list/getByBreed/:breed', dogsController.getDogsByBreed);
 router.get('/list/getByActivity/:activity', dogsController.getDogsByActivity);
 router.get('/list/getByWeight/:weight', dogsController.getDogsByWeight);

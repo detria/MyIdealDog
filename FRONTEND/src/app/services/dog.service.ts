@@ -28,7 +28,12 @@ export class DogService {
   constructor(private http: HttpClient) { }
 
   getDog() {
-    return this.http.get<Dog[]>(this.URL_API + "/list")
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'token': localStorage.getItem('token') || '{}'
+      })
+    };
+    return this.http.get<Dog[]>(this.URL_API + "/list",httpOptions)
   }
 
   getDogsBy(url:string,example:string){
@@ -64,12 +69,6 @@ export class DogService {
 
   saveDataDog(dog:Dog){
     this.dog=dog
-  }
-
-  /**Dependiendo si quieres crear una nueva raza o editar una que ya existe pasas un parametro u otro */
-  createOrEdit(edit:boolean){
-    //si es true es crear // si es false es editar
-    this.create=edit
   }
 
   
