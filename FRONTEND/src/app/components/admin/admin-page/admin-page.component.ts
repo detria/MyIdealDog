@@ -125,14 +125,13 @@ export class AdminPageComponent implements OnInit {
 
   }
   async aniadirRaza() {
-    await this.dogService.createOrEdit(true)
+    this.dogService.create=true
     this.router.navigate(['/createEditDog']);
   }
 
   async modificarPerro(breed: string) {
-    await this.dogService.createOrEdit(false)
+    this.dogService.create=false
     const dogs = await this.dogService.getDogsBy("getByBreed", breed)
-    //dogs.forEach(e=>console.log(e[0]))
     var dogEdit: Dog = {
       breed: '',
       description: '',

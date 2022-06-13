@@ -15,10 +15,22 @@ export class CreateEditDogComponent implements OnInit {
   constructor(private dogService: DogService, private router: Router) { }
 
   ngOnInit(): void {
+    var btn = document.getElementById('guardar')
     if (this.dogService.create === false) {
       this.cargarRazaEditar()
+      if (btn != null) {
+        btn.innerHTML = 'Editar'
+        let inputBreed= document.getElementById('raza')
+        inputBreed?.setAttribute("readonly","readonly")
+      }
+    }else{
+      if (btn != null) {
+        btn.innerHTML = 'Crear'
+      }
     }
   }
+
+  editar: boolean | undefined
 
   raza: string = ""
   descripcion: string = ""
@@ -82,6 +94,16 @@ export class CreateEditDogComponent implements OnInit {
 
   }
 
+  guardarCambios() {
+    if (this.dogService.create === false) {
+      console.log(this.dogService.create)
+      this.editarPerro()
+    } else if (this.dogService.create === true) {
+      console.log(this.dogService.create)
+      this.crearNuevaRaza()
+    }
+  }
+
   async cargarRazaEditar() {
     let dog: Dog = await this.dogService.dog
     this.raza = dog.breed
@@ -102,13 +124,13 @@ export class CreateEditDogComponent implements OnInit {
       breed: this.raza,
       description: this.descripcion,
       weight: this.peso,
-      activity: this.seleccionActividad,
-      care_requirement: this.seleccionCuidados,
+      activity: this.opcionSeleccionadaActividad,
+      care_requirement: this.opcionSeleccionadaCuidados,
       life_expectancy: this.esperanzaVida,
       imgs: [this.foto1, this.foto2],
       trainingTutorial: this.tutorial,
       video: this.video,
-      size: this.seleccionTamanio
+      size: this.opcionSeleccionadaTamanio
     }
 
     this.dogService.editDog(dog.breed, dog).subscribe(
