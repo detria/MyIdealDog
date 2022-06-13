@@ -62,7 +62,7 @@ export class UserService {
     return this.http.post(this.URL_API+"/login", user);
   }
 
-  editUser(user:User){
+  editUser(user:any){
     const httpOptions = {
       headers: new HttpHeaders({
         'token': localStorage.getItem('token') || '{}'

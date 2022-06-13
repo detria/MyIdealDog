@@ -74,7 +74,7 @@ users.deleteUser = async (req, res) => {
 
 users.deleteUserEmail = async (req, res) => {
   console.log(req.params.email)
-  await User.findOneAndDelete({email:req.params.email})
+  await User.findOneAndDelete({ email: req.params.email })
   console.log("eliminado")
   res.json({ status: "Usuario eliminado con exito" })
 }
@@ -82,10 +82,19 @@ users.deleteUserEmail = async (req, res) => {
 users.editUser = async (req, res) => {
   const bcrypt = require("bcryptjs");
   var rondas = 10;
-  const contraseñaEncriptada = await bcrypt.hash(req.body.password, rondas);
-  req.body.password=contraseñaEncriptada
-  const userFound=await User.findOneAndUpdate({_id:res.user.userFound._id},req.body)
+  console.log(req.body.password)
+  if (typeof (req.body.password) != 'undefined') {
+    const contraseñaEncriptada = await bcrypt.hash(req.body.password, rondas);
+    req.body.password = contraseñaEncriptada
+    console.log(req.body.password )
+    const userFound = await User.findOneAndUpdate({ _id: res.user.userFound._id },{name:req.body.name,lastname:req.body.lastname,email:req.body.email,password:req.body.password})
+
+  }else{
+    const userFound = await User.findOneAndUpdate({ _id: res.user.userFound._id },{name:req.body.name,lastname:req.body.lastname,email:req.body.email})
+
+  }
   
+
   res.json({ status: "Usuario modificado con exito" })
 }
 
