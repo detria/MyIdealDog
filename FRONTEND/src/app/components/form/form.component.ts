@@ -36,18 +36,18 @@ export class FormComponent implements OnInit {
       Swal.fire({
         title: '¡Lo sentimos, no hemos podido encontrar una raza que se adapte a ti!',
         text: '',
-        background: 'url(assets/imgs/login1.jpg)',
-        icon: 'error',
+        imageUrl: 'https://us.123rf.com/450wm/bolsunova/bolsunova1604/bolsunova160400032/55147109-vector-aislado-de-la-ilustraci%C3%B3n-de-dibujos-animados-car%C3%A1cter-emoji-perro-triste-y-frustrado-llorar-.jpg?ver=6',
         confirmButtonText: 'OK',
         confirmButtonColor: 'black'
       })
       this.resetearFormulario()
     } else {
+      let urlImg = listaAfines[0].imgs[0]
+      console.log(urlImg)
       Swal.fire({
-        title: '¡Estas son las razas que hemos visto que mas se adaptan a ti!',
-        text: "",
-        background: 'url(assets/imgs/login1.jpg)',
-        icon: 'success',
+        title: listaAfines[0].breed,
+        text: '¡Esta es la raza que más se adapta a ti!!',
+        imageUrl: urlImg,
         confirmButtonText: 'OK',
         confirmButtonColor: 'black'
       })
@@ -129,8 +129,9 @@ export class FormComponent implements OnInit {
       } else if (this.estadoCuidados === 'si') {
         this.perrosAfines = this.perrosAfines.filter(e => e.care_requirement === 'alto')
       }
-      
-    return this.perrosAfines.filter((ele, pos) => this.perrosAfines.indexOf(ele) == pos);
+
+      console.log()
+      return this.perrosAfines.filter((ele, pos) => this.perrosAfines.indexOf(ele) == pos);
     }
     return null;
   }

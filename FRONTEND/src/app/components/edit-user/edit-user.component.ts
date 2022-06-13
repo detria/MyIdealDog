@@ -92,7 +92,7 @@ export class EditUserComponent implements OnInit {
   cancelar() {
     Swal.fire({
       title: '¿Estás seguro de volver?',
-      icon: 'warning',
+      icon: 'question',
       showCancelButton: true,
       cancelButtonText: "Cancelar",
       confirmButtonColor: '#3085d6',

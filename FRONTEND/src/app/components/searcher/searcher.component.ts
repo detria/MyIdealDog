@@ -1,7 +1,8 @@
 import { AfterViewChecked, AfterViewInit, APP_BOOTSTRAP_LISTENER, Component, OnInit } from '@angular/core';
 import { DogService } from '../../services/dog.service';
 import { Dog } from '../../models/dog';
-import { Observable } from 'rxjs';
+
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-searcher',
@@ -104,6 +105,16 @@ export class SearcherComponent implements OnInit {
     }
     if (this.opcionSeleccionada != '0') {
       this.dogs2 = this.dogs2.filter(e => e.breed === this.seleccion);
+    }
+    if(this.dogs2.length==0){
+      Swal.fire({
+        title: 'No se han encontrado resultados',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        confirmButtonColor: 'black',
+      }).then(() => {
+        this.eliminarFiltros()
+      })
     }
   }
 

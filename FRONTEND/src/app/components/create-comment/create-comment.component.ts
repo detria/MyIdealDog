@@ -14,14 +14,14 @@ import { Router } from '@angular/router';
 })
 export class CreateCommentComponent implements OnInit {
 
-  constructor(public dogService: DogService,private commentService:CommentService,private userService:UserService,private router: Router) { }
+  constructor(public dogService: DogService, private commentService: CommentService, private userService: UserService, private router: Router) { }
 
-  dogs:Dog[]=[]
-  breeds:string[]=[]
-  topic:string=""
-  message:string=""
-  opcionSeleccionada:string='0'
-  seleccion:string=""
+  dogs: Dog[] = []
+  breeds: string[] = []
+  topic: string = ""
+  message: string = ""
+  opcionSeleccionada: string = '0'
+  seleccion: string = ""
 
   ngOnInit(): void {
     this.obtenerPerros()
@@ -30,15 +30,17 @@ export class CreateCommentComponent implements OnInit {
     this.obtenerRazas()
   }
 
-  createComment(){
-    const comment:Comment={
-      topic:this.topic,
-      comment:this.message,
-      date:"04/06/2022",
-      userId:""
+  createComment() {
+    var fecha = new Date();
+    var options:any = { year: 'numeric', month: 'long', day: 'numeric' };
+    const comment: Comment = {
+      topic: this.topic,
+      comment: this.message,
+      date:  fecha.toLocaleDateString("es-ES", options),
+      userId: ""
     }
     this.commentService.createComment(comment).subscribe(
-      res=>{
+      res => {
         Swal.fire({
           title: 'Su comentario se ha publicado correctamente!',
           text: '',
@@ -47,10 +49,10 @@ export class CreateCommentComponent implements OnInit {
           confirmButtonText: 'OK',
           confirmButtonColor: 'black',
         }).then(() => {
-            this.router.navigate(['/forum']);
+          this.router.navigate(['/forum']);
         })
       },
-      err=>console.log(err)
+      err => console.log(err)
     )
   }
 
@@ -68,7 +70,7 @@ export class CreateCommentComponent implements OnInit {
     return breeds;
   }
 
-  capturarRaza(){
-    this.topic=this.opcionSeleccionada
+  capturarRaza() {
+    this.topic = this.opcionSeleccionada
   }
 }

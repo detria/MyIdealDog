@@ -21,6 +21,7 @@ export class ForumComponent implements OnInit {
   opcionSeleccionada: string = '0'
   seleccion: string = ''
   comentarios: boolean = true
+  selector:boolean=false
 
   ngAfterViewChecked(): void {
     this.obtenerRazas()
@@ -55,27 +56,20 @@ export class ForumComponent implements OnInit {
     const comments = await this.commentsService.getComments();
     comments.forEach(c => this.publicaciones2 = c)
     this.comentarios = true
+    this.selector=false
   }
 
   async obtenerMisComentarios() {
-    const comments = await this.commentsService.getCommentsByUser()
-    comments.forEach(c => this.publicaciones = c)
-  }
-
-  async obtenerMisComentarios2() {
+    this.selector=true
     const comments = await this.commentsService.getCommentsByUser()
     comments.forEach(c => this.publicaciones2 = c)
-    this.comentarios = false
   }
 
   quitarFiltro() {
     if (this.comentarios == true) {
       this.obtenerComentarios2()
       this.opcionSeleccionada = '0'
-    } else {
-      this.obtenerMisComentarios2()
-      this.opcionSeleccionada = '0'
-    }
+    } 
   }
 
   async filtrarRaza() {
@@ -88,13 +82,10 @@ export class ForumComponent implements OnInit {
     }
     if (this.comentarios == false) {
       await this.obtenerMisComentarios()
-      this.publicaciones2 = this.publicaciones
-      if (this.opcionSeleccionada != '0') {
-        this.publicaciones2 = this.publicaciones.filter(p => p.topic === this.seleccion);
-      }
     }
 
   }
+  
 
   capturarRaza() {
     this.seleccion = this.opcionSeleccionada

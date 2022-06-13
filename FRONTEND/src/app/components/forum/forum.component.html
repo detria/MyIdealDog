@@ -8,7 +8,7 @@
     <div id="left">
       <nav class="nav">
         <button type="button" class="btn btn-light" (click)="obtenerComentarios2()">Todas las publicaciones</button>
-        <button type="button" class="btn btn-light" (click)="obtenerMisComentarios2()">Mis publicaciones</button>
+        <button type="button" class="btn btn-light" (click)="obtenerMisComentarios()">Mis publicaciones</button>
         <button type="button" class="btn btn-light" routerLink="/createComment">Crear publicacion</button>
       </nav>
       
@@ -16,12 +16,12 @@
 
     <div id="right">
       <nav class="nav">
-      <select class="form-select" aria-label="dog race" id="breedSelect" [(ngModel)]="opcionSeleccionada" (change)="capturarRaza()">
+      <select class="form-select" aria-label="dog race" id="breedSelect" [(ngModel)]="opcionSeleccionada" (change)="capturarRaza()" [disabled]="selector">
         <option value="0" >Seleccione un tema para filtrar</option>
         <option *ngFor="let breed of breeds">{{breed}}</option>
     </select>
-    <button class="btn btn-light" id="buscar" (click)="filtrarRaza()">Buscar</button>
-    <button class="btn btn-light" id="buscar" (click)="quitarFiltro()">Quitar filtro</button>
+    <button class="btn btn-light" id="buscar" (click)="filtrarRaza()" [disabled]="selector">Buscar</button>
+    <button class="btn btn-light" id="buscar" (click)="quitarFiltro()" [disabled]="selector">Quitar filtro</button>
   </nav>
     </div>
   </div>
