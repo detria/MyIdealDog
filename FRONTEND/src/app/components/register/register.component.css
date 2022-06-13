@@ -24,7 +24,7 @@ label{
   background-color: rgba(240, 248, 255, 0);
   font-family: 'Boogaloo';
   font-size: 18px;
-  height: 550px;
+  height: auto;
   margin-top: auto;
   margin-bottom: auto;
   width: 400px;
@@ -74,7 +74,7 @@ label{
 
 .login_btn {
   color: black;
-  background-color: #ffffff3d;
+  background-color: #ffffff;
   width: 100px;
 }
 

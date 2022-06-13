@@ -23,26 +23,52 @@
                 <h3>Register</h3>
             </div>
             <div class="card-body">
-                <form id="form" #userForm="ngForm" (ngSubmit)="registerUser(userForm)">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" [(ngModel)]="userService.userRegister.name" name="name" class="form-control" id="name" placeholder="name">
+                <form id="form" [formGroup]="userForm" (ngSubmit)="registerUser()" >
+                    <div class="alert-danger" *ngIf="userForm.controls['name'].invalid &&(userForm.controls['name'].dirty || userForm.controls['name'].touched )">
+                        <div class="container-error-message">
+                            * Nombre obligatorio
+                        </div>
+                        <div class="container-error-message" >
+                            Almenos 5 letras
+                        </div>
+                    </div>
+                    <div class="form-group" >
+                        <label for="name">Nombre</label>
+                        <input type="text"  formControlName="name" name="name" class="form-control" id="name" placeholder="name" required maxlength="15">
+                    </div>
+                    <div class="alert-danger" *ngIf="userForm.controls['lastname'].invalid &&(userForm.controls['lastname'].dirty || userForm.controls['lastname'].touched)">
+                        <div class="container-error-message">
+                            * Apellidos obligatorios
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="lastname">Lastname</label>
-                        <input type="text" [(ngModel)]="userService.userRegister.lastname"  name="lastname" class="form-control" id="lastname" placeholder="lastname">
+                        <label for="lastname">Apellidos</label>
+                        <input type="text" formControlName="lastname"  name="lastname" class="form-control" id="lastname" required placeholder="lastname" maxlength="15" >
+                    </div>
+                    <div class="alert-danger" *ngIf="userForm.controls['email'].invalid &&(userForm.controls['email'].dirty || userForm.controls['email'].touched )">
+                        <div class="container-error-message" >
+                            * Email obligatorio
+                        </div>
+                        <div class="container-error-message" >
+                            El email debe tener el siguiente formato:"ejemplo@ejemplo.ejemplo"
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" [(ngModel)]="userService.userRegister.email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        <label for="email">Email</label>
+                        <input type="email" formControlName="email" name="email" class="form-control" id="exampleInputEmail1" required maxlength="20"
                             placeholder="Enter email">
                     </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" [(ngModel)]="userService.userRegister.password" name="password" class="form-control" id="password"  placeholder="Enter password">
+                    <div class="alert-danger" *ngIf="userForm.controls['password'].invalid&&(userForm.controls['password'].dirty || userForm.controls['password'].touched)">
+                        <div class="container-error-message">
+                            * Contraseña obligatoria
+                        </div>
                     </div>
                     <div class="form-group">
-                        <button type="submit"  value="login" class="btn float-right login_btn">Submit</button>
+                        <label for="password">Contraseña</label>
+                        <input type="password" formControlName="password" name="password" class="form-control" id="password"  placeholder="Enter password" ngModel required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit"  value="login" class="btn float-right login_btn" [disabled]="userForm.invalid">Submit</button>
                     </div>
                 </form>
             </div>
