@@ -29,7 +29,7 @@
 .card {
   /*background-image: url(/assets/imgs/fondoPeque.png);*/
   background-color: #ffffff2a;
-  height: 400px;
+  height: 380px;
   margin-top: auto;
   margin-bottom: auto;
   font-family: 'Oleo';
@@ -94,6 +94,7 @@ input:focus {
   width: 100px;
   font-size: large;
   font-weight: bold;
+  margin-top: 20px;
 }
 
 .login_btn:hover {

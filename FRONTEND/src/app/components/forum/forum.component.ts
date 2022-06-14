@@ -16,29 +16,34 @@ export class ForumComponent implements OnInit {
 
   dogs: Dog[] = []
   breeds: string[] = []
-  publicaciones: Comment[] = []
-  publicaciones2: Comment[] = []
-  opcionSeleccionada: string = '0'
-  seleccion: string = ''
-  comentarios: boolean = true
+  publications: Comment[] = []
+  publications2: Comment[] = []
+  selectedOption: string = '0'
+  selection: string = ''
+  comments: boolean = true
   selector:boolean=false
 
   ngAfterViewChecked(): void {
-    this.obtenerRazas()
+    this.getBreeds()
   }
 
   ngOnInit(): void {
-    this.obtenerPerros()
-    this.obtenerComentarios()
-    this.obtenerComentarios2()
+    this.getDogs()
+    this.getComments()
+    this.getComments2()
   }
 
   //OBTENCIÓN DE LOS PERROS DE LA BASE DE DATOS PARA SACAR LAS RAZAS EX
-  async obtenerPerros() {
+  async getDogs() {
     const dogs = await this.dogService.getDog();
     dogs.forEach(el => this.dogs = el)
   }
-  obtenerRazas(): string[] {
+
+  /**
+   * Recoge de todos los perros de la base de datos su raza para asi poder guardarlas y mostrarle al usuario todas las razas disponibles en la BBDD
+   * @returns devuelve las razas encontradas
+   */
+  getBreeds(): string[] {
     const breeds: string[] = []
     this.dogs.forEach(dog => {
       breeds.push(dog.breed)
@@ -47,52 +52,66 @@ export class ForumComponent implements OnInit {
     return breeds;
   }
 
-  async obtenerComentarios() {
+  /**
+   * Obtiene todos los comentarios de la BBDD
+   */
+  async getComments() {
     const comments = await this.commentsService.getComments();
-    comments.forEach(c => this.publicaciones = c)
+    comments.forEach(c => this.publications = c)
   }
 
-  async obtenerComentarios2() {
+  /**
+   * Obtiene todos los comentarios de la base de datos pero este método se usa como auxiliar.
+   */
+  async getComments2() {
     const comments = await this.commentsService.getComments();
-    comments.forEach(c => this.publicaciones2 = c)
-    this.comentarios = true
+    comments.forEach(c => this.publications2 = c)
+    this.comments = true
     this.selector=false
   }
 
-  async obtenerMisComentarios() {
+  /**
+   * Obtiene todos los comentarios hechos por el usuario actual filtrando por su id
+   */
+  async getMyComments() {
     this.selector=true
     const comments = await this.commentsService.getCommentsByUser()
-    comments.forEach(c => this.publicaciones2 = c)
+    comments.forEach(c => this.publications2 = c)
   }
 
-  quitarFiltro() {
-    if (this.comentarios == true) {
-      this.obtenerComentarios2()
-      this.opcionSeleccionada = '0'
+  /**
+   * Elimina todos los filtros aplicados al select
+   */
+  removeFilter() {
+    if (this.comments == true) {
+      this.getComments2()
+      this.selectedOption = '0'
     } 
   }
 
-  async filtrarRaza() {
-    if (this.comentarios == true) {
-      await this.obtenerComentarios()
-      this.publicaciones2 = this.publicaciones
-      if (this.opcionSeleccionada != '0') {
-        this.publicaciones2 = this.publicaciones.filter(p => p.topic === this.seleccion);
+  /**
+   * Filtra por raza todos los comentarios de la categoria de 'Todas las publicaciones', que serían todos los comentarios hechos hasta el momento.
+   */
+  async breedFilter() {
+    if (this.comments == true) {
+      await this.getComments()
+      this.publications2 = this.publications
+      if (this.selectedOption != '0') {
+        this.publications2 = this.publications.filter(p => p.topic === this.selection);
       }
     }
-    if (this.comentarios == false) {
-      await this.obtenerMisComentarios()
+    if (this.comments == false) {
+      await this.getMyComments()
     }
 
   }
   
 
-  capturarRaza() {
-    this.seleccion = this.opcionSeleccionada
-  }
-
-  crearPublicacion() {
-
+  /**
+   * Recupera el valor seleccionado del select para poder filtrar luego con el
+   */
+  changeSelection() {
+    this.selection = this.selectedOption
   }
 
 

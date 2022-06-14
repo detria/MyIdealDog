@@ -15,96 +15,118 @@ export class SearcherComponent implements OnInit {
   }
 
   ngAfterViewChecked(): void {
-    this.obtenerRazas()
+    this.getBreeds()
   }
 
   dogs2: Dog[] = []
   dogs: Dog[] = []
 
   sizes: string[] = ["mini", "pequeño", "mediano", "grande"]
-  actividad: string[] = ["baja", "media", "alta"]
-  requerimientoCuidados: string[] = ["bajo", "medio", "alto"]
+  activity: string[] = ["baja", "media", "alta"]
+  careRequirement: string[] = ["bajo", "medio", "alto"]
   breeds: string[] = []
 
-  disponibilidad: boolean = false
+  availability: boolean = false
 
 
-  opcionSeleccionada: string = '0';
-  seleccion: string = ""
+  selectedOptionBreed: string = '0';
+  selection: string = ""
 
-  opcionSeleccionadaTamanio: string = '0';
-  seleccionTamanio: string = ""
+  selectedOptionSize: string = '0';
+  selectedSize: string = ""
 
-  opcionSeleccionadaActividad: string = '0'
-  seleccionActividad: string = ""
+  selectedOptionActivity: string = '0'
+  selectedActivity: string = ""
 
-  opcionSeleccionadaCuidados: string = '0'
-  seleccionCuidados: string = ""
+  selectedOptionCareRequirement: string = '0'
+  selectionCareRequirement: string = ""
 
-  capturarRaza(): string {
-    this.seleccion = this.opcionSeleccionada;
-    console.log(this.seleccion)
-    if (this.opcionSeleccionada != '0') { this.disponibilidad = true } else {
-      this.obtenerPerros2()
-      this.disponibilidad = false
+  /**
+   * 
+   * @returns devuelve la raza seleccionada por el usuario.
+   */
+  changeBreed(): string {
+    this.selection = this.selectedOptionBreed;
+    if (this.selectedOptionBreed != '0') { this.availability = true } else {
+      this.getDogs2()
+      this.availability = false
     }
 
-    return this.seleccion
+    return this.selection
   }
 
-  eliminarFiltros() {
-    this.opcionSeleccionada = '0'
-    this.opcionSeleccionadaActividad = '0'
-    this.opcionSeleccionadaCuidados = '0'
-    this.opcionSeleccionadaTamanio = '0'
-    this.obtenerPerros2()
-    this.disponibilidad = false
+  /**
+   * Elimina todos los filtros aplicados a la lista de perros
+   */
+  removeFilters() {
+    this.selectedOptionBreed = '0'
+    this.selectedOptionActivity = '0'
+    this.selectedOptionCareRequirement = '0'
+    this.selectedOptionSize = '0'
+    this.getDogs2()
+    this.availability = false
   }
 
-  capturarTamanio() {
-    this.seleccionTamanio = this.opcionSeleccionadaTamanio;
-    console.log(this.seleccionTamanio)
+  /**
+   * Recoge y asigna la opccion seleccionada por el usuario en el select de de selecciona el tamaño
+   */
+  sizeChange() {
+    this.selectedSize = this.selectedOptionSize;
   }
 
-  capturarActividad() {
-    this.seleccionActividad = this.opcionSeleccionadaActividad;
-    console.log(this.seleccionActividad)
+  /**
+   * Recoge y asigna la opcion seleccionada por el usuario en el select de de selecciona la actividad
+   */
+  activityChange() {
+    this.selectedActivity = this.selectedOptionActivity;
   }
   
-  capturarCuidados() {
-    this.seleccionCuidados = this.opcionSeleccionadaCuidados;
-    console.log(this.seleccionCuidados)
+  /**
+   * Recoge y asigna la opcion seleccionada por el usuario en el select de selecciona el requerimiento de cuidados.
+   */
+  careRequirementChange() {
+    this.selectionCareRequirement = this.selectedOptionCareRequirement;
   }
 
   ngOnInit(): void {
-    this.obtenerPerros();
-    this.obtenerPerros2();
+    this.getDogs();
+    this.getDogs2();
   }
 
-  async obtenerPerros() {
+  /**
+   * Obtiene todos los perros de la BBDD
+   */
+  async getDogs() {
     const dogs = await this.dogService.getDog();
     dogs.forEach(el => this.dogs = el)
   }
 
-  async obtenerPerros2() {
+  /**
+   * Obtiene todos los perros de la BBDD, es un método que uso auxiliar
+   */
+  async getDogs2() {
     const dogs = await this.dogService.getDog();
     dogs.forEach(el => this.dogs2 = el)
   }
 
-  async busqueda() {
-    await this.obtenerPerros();
+
+  /**
+   * Segun los filtros qu el usuario ha aplicado se va filtrando sobre la lista de perros principal y se mostrara el resultado de los perros que hay con los filtros aplicados.
+   */
+  async search() {
+    await this.getDogs();
     this.dogs2 = this.dogs
-    if (this.opcionSeleccionadaActividad != '0') {
-      this.dogs2 = this.dogs2.filter(e => e.activity === this.seleccionActividad);
+    if (this.selectedOptionActivity != '0') {
+      this.dogs2 = this.dogs2.filter(e => e.activity === this.selectedActivity);
     }
-    if (this.opcionSeleccionadaCuidados != '0') {
-      this.dogs2 = this.dogs2.filter(e => e.care_requirement === this.seleccionCuidados);
+    if (this.selectedOptionCareRequirement != '0') {
+      this.dogs2 = this.dogs2.filter(e => e.care_requirement === this.selectionCareRequirement);
     }
-    if (this.opcionSeleccionadaTamanio != '0') {
-      this.dogs2 = this.dogs2.filter(e => e.size === this.seleccionTamanio);
+    if (this.selectedOptionSize != '0') {
+      this.dogs2 = this.dogs2.filter(e => e.size === this.selectedSize);
     }
-    if (this.opcionSeleccionada != '0') {
-      this.dogs2 = this.dogs2.filter(e => e.breed === this.seleccion);
+    if (this.selectedOptionBreed != '0') {
+      this.dogs2 = this.dogs2.filter(e => e.breed === this.selection);
     }
     if(this.dogs2.length==0){
       Swal.fire({
@@ -113,12 +135,16 @@ export class SearcherComponent implements OnInit {
         confirmButtonText: 'OK',
         confirmButtonColor: 'black',
       }).then(() => {
-        this.eliminarFiltros()
+        this.removeFilters()
       })
     }
   }
 
-  obtenerRazas(): string[] {
+  /**
+   * Recoge de todos los perros de la base de datos su raza para asi poder guardarlas y mostrarle al usuario todas las razas disponibles en la BBDD
+   * @returns devuelve las razas encontradas
+   */
+  getBreeds(): string[] {
     const breeds: string[] = []
     this.dogs2.forEach(dog => {
       breeds.push(dog.breed)

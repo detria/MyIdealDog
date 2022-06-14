@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-navbar-user',
@@ -13,7 +14,11 @@ export class NavbarUserComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Cierra sesión y elimina el token actual que pertenece al usuario actual logeado
+   */
   cerrarSesion(){
+    
     localStorage.removeItem('token')
     this.router.navigate(['/introduction']);
   }

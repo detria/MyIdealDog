@@ -6,30 +6,30 @@
     <div id="filtros" class="container">
         <div class="row justify-content-center align-items-center minh-100" id="firstSelect">
 
-            <select class="form-select" aria-label="dog race"id="breedSelect"[(ngModel)]="opcionSeleccionada" (change)="capturarRaza()">
+            <select class="form-select" aria-label="dog race"id="breedSelect"[(ngModel)]="selectedOptionBreed" (change)="changeBreed()">
                 <option value="0">Seleccione una raza</option>
                 <option *ngFor="let breed of breeds">{{breed}}</option>
             </select>
-            <select class="form-select" aria-label="dog size" id="sizeSelect" [(ngModel)]="opcionSeleccionadaTamanio" (change)="capturarTamanio()"  [disabled]="disponibilidad" >
+            <select class="form-select" aria-label="dog size" id="sizeSelect" [(ngModel)]="selectedOptionSize" (change)="sizeChange()"  [disabled]="availability" >
                 <option value="0">Seleccione un tamaño</option>
                 <option *ngFor="let size of sizes">{{size}}</option>
             </select>
 
         </div>
         <div class="row justify-content-center align-items-center minh-100" id="secondSelect">
-            <select class="form-select" aria-label="Default select example" id="healthCareSelect"  [(ngModel)]="opcionSeleccionadaCuidados" (change)="capturarCuidados()" [disabled]="disponibilidad">
+            <select class="form-select" aria-label="Default select example" id="healthCareSelect"  [(ngModel)]="selectedOptionCareRequirement" (change)="careRequirementChange()" [disabled]="availability">
                 <option value="0">Seleccione el requerimiento de cuidados</option>
-                <option *ngFor="let cuidados of requerimientoCuidados">{{cuidados}}</option>
+                <option *ngFor="let cuidados of careRequirement">{{cuidados}}</option>
             </select>
             
-            <select class="form-select" aria-label="Default select example" id="activitySelect" [(ngModel)]="opcionSeleccionadaActividad" (change)="capturarActividad()"  [disabled]="disponibilidad" >
+            <select class="form-select" aria-label="Default select example" id="activitySelect" [(ngModel)]="selectedOptionActivity" (change)="activityChange()"  [disabled]="availability" >
                 <option value="0">Seleccione una actividad</option>
-                <option *ngFor="let a of actividad">{{a}}</option>
+                <option *ngFor="let a of activity">{{a}}</option>
             </select>
         </div>
         <div class="row justify-content-center align-items-center minh-100" id="secondSelect">
-            <button type="button" class="btn btn-light" (click)="busqueda()">Buscar</button>
-            <button type="button" class="btn btn-light" (click)="eliminarFiltros()">Quitar filtros</button>
+            <button type="button" class="btn btn-light" (click)="search()">Buscar</button>
+            <button type="button" class="btn btn-light" (click)="removeFilters()">Quitar filtros</button>
         </div>
 
         <div class="row justify-content-center align-items-center minh-100" id="cards">

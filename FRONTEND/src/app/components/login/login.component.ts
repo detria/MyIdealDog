@@ -19,6 +19,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  /**
+   * Controla el inicio de sesión de un usuario ya registrado
+   */
   loginUser() {
     this.userService.loginUser({
       email: this.email,
@@ -50,9 +53,7 @@ export class LoginComponent implements OnInit {
             icon: 'error',
             confirmButtonText: 'OK'
           })
-
         }
-
       },
       err => {
         console.log(err)

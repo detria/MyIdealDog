@@ -20,23 +20,26 @@ export class CreateCommentComponent implements OnInit {
   breeds: string[] = []
   topic: string = ""
   message: string = ""
-  opcionSeleccionada: string = '0'
-  seleccion: string = ""
+  selectedOption: string = '0'
+  selection: string = ""
 
   ngOnInit(): void {
-    this.obtenerPerros()
+    this.getDogs()
   }
   ngAfterViewChecked(): void {
-    this.obtenerRazas()
+    this.getBreeds()
   }
 
+  /**
+   * Crea un comentario y lo introduce a la BBDD
+   */
   createComment() {
-    var fecha = new Date();
+    var actualDate = new Date();
     var options:any = { year: 'numeric', month: 'long', day: 'numeric' };
     const comment: Comment = {
       topic: this.topic,
       comment: this.message,
-      date:  fecha.toLocaleDateString("es-ES", options),
+      date:  actualDate.toLocaleDateString("es-ES", options),
       userId: ""
     }
     this.commentService.createComment(comment).subscribe(
@@ -56,12 +59,19 @@ export class CreateCommentComponent implements OnInit {
     )
   }
 
-  async obtenerPerros() {
+  /**
+   * Obtiene todos los perros de la BBDD
+   */
+  async getDogs() {
     const dogs = await this.dogService.getDog();
     dogs.forEach(el => this.dogs = el)
   }
 
-  obtenerRazas(): string[] {
+  /**
+   * Obtiene de cada perro de la BBDD su raza para asi poder rellenar el select con todas las razas que existen en la BBDD
+   * @returns devuelve las razas encontradas
+   */
+  getBreeds(): string[] {
     const breeds: string[] = []
     this.dogs.forEach(dog => {
       breeds.push(dog.breed)
@@ -70,7 +80,10 @@ export class CreateCommentComponent implements OnInit {
     return breeds;
   }
 
+  /**
+   * Se recupera la opcion seleccionada por el usuario en el select
+   */
   capturarRaza() {
-    this.topic = this.opcionSeleccionada
+    this.topic = this.selectedOption
   }
 }

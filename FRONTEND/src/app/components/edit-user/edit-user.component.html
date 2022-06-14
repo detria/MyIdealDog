@@ -10,12 +10,12 @@
                         <div class="input-group form-group">
                             Nombre:
                             <input type="text" name="nombre" class="form-control" id="nombre"
-                                placeholder="Nombre"  [(ngModel)]="nombre">
+                                placeholder="Nombre"  [(ngModel)]="name">
                         </div>
                         <div class="input-group form-group">
                             Apellidos:
                             <input type="text" name="apellidos" class="form-control" id="apellidos"
-                                placeholder="Apellidos"  [(ngModel)]="apellidos">
+                                placeholder="Apellidos"  [(ngModel)]="lastname">
                         </div>
                         <div class="input-group form-group">
                             Email:
@@ -25,12 +25,12 @@
                         <div class="input-group form-group">
                             Contraseña:
                             <input type="password" name="contrasenia" class="form-control" id="contrasenia"
-                                placeholder="Contraseña"  [(ngModel)]="contrasenia" >
+                                placeholder="Contraseña"  [(ngModel)]="password" >
                         </div>
                         <div class="form-group">
-                            <button type="submit" value="publicar" class="btn btn-success" (click)="cambiarDatos()">Editar</button>
+                            <button type="submit" value="publicar" class="btn btn-success" (click)="changeData()">Editar</button>
                             <button type="submit" value="cancelar" class="btn btn-danger"
-                                (click)="cancelar()">Cancelar</button>
+                                (click)="cancel()">Cancelar</button>
                         </div>
                     </form>
                 </div>

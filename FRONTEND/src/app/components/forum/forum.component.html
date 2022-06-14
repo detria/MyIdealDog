@@ -7,8 +7,8 @@
   <div id="content">
     <div id="left">
       <nav class="nav">
-        <button type="button" class="btn btn-light" (click)="obtenerComentarios2()">Todas las publicaciones</button>
-        <button type="button" class="btn btn-light" (click)="obtenerMisComentarios()">Mis publicaciones</button>
+        <button type="button" class="btn btn-light" (click)="getComments2()">Todas las publicaciones</button>
+        <button type="button" class="btn btn-light" (click)="getMyComments()">Mis publicaciones</button>
         <button type="button" class="btn btn-light" routerLink="/createComment">Crear publicacion</button>
       </nav>
       
@@ -16,21 +16,21 @@
 
     <div id="right">
       <nav class="nav">
-      <select class="form-select" aria-label="dog race" id="breedSelect" [(ngModel)]="opcionSeleccionada" (change)="capturarRaza()" [disabled]="selector">
+      <select class="form-select" aria-label="dog race" id="breedSelect" [(ngModel)]="selectedOption" (change)="changeSelection()" [disabled]="selector">
         <option value="0" >Seleccione un tema para filtrar</option>
         <option *ngFor="let breed of breeds">{{breed}}</option>
     </select>
-    <button class="btn btn-light" id="buscar" (click)="filtrarRaza()" [disabled]="selector">Buscar</button>
-    <button class="btn btn-light" id="buscar" (click)="quitarFiltro()" [disabled]="selector">Quitar filtro</button>
+    <button class="btn btn-light" id="buscar" (click)="breedFilter()" [disabled]="selector">Buscar</button>
+    <button class="btn btn-light" id="buscar" (click)="removeFilter()" [disabled]="selector">Quitar filtro</button>
   </nav>
     </div>
   </div>
-  <div class="center" id="center" *ngFor="let publicacion of publicaciones2">
+  <div class="center" id="center" *ngFor="let publication of publications2">
     <mat-card class="example-card">
         <mat-card-content >
-          <mat-card-title>Tema: {{publicacion.topic}}</mat-card-title>
-          <p>Comentario: {{publicacion.comment}}</p>
-          <p>Fecha de publicación: {{publicacion.date}}</p>
+          <mat-card-title>Tema: {{publication.topic}}</mat-card-title>
+          <p>Comentario: {{publication.comment}}</p>
+          <p>Fecha de publicación: {{publication.date}}</p>
         </mat-card-content>
       </mat-card>
 </div>

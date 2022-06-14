@@ -1,7 +1,7 @@
 <html>
 
 <body>
-  <button type="button" class="btn btn-dark" id="botonVolver" (click)="cerrarSesion()">❌ Salir de la sesión</button>
+  <button type="button" class="btn btn-dark" id="botonVolver" (click)="closeSesion()">❌ Salir de la sesión</button>
   <div class="container">
     <h3>Usuarios registrados</h3>
     <table class="table" id="tableUsers">
@@ -17,7 +17,7 @@
         <td id="name" [contentEditable]="editable">{{user.name}}</td>
         <td id="lastname" [contentEditable]="editable">{{user.lastname}}</td>
         <td id="email" [contentEditable]="editable">{{user.email}}</td>
-        <td><button type="button" class="btn btn-danger" (click)="eliminarUsuario(user.email)">✘ Eliminar</button></td>
+        <td><button type="button" class="btn btn-danger" (click)="deleteUser(user.email)">✘ Eliminar</button></td>
       </tbody>
     </table>
 
@@ -36,10 +36,10 @@
         <td id="name">{{dog.breed}}</td>
         <td id="lastname">{{dog.description}}</td>
         <td><button type="button" class="btn btn-danger" (click)="eliminarPerro(dog.breed)">✘ Eliminar</button></td>
-        <td><button type="button" class="btn btn-warning" (click)="modificarPerro(dog.breed)">✎ Modificar</button></td>
+        <td><button type="button" class="btn btn-warning" (click)="editDog(dog.breed)">✎ Modificar</button></td>
       </tbody>
     </table>
-    <td><button type="button" class="btn btn-success" (click)="aniadirRaza()">Añadir una nueva raza</button></td>
+    <td><button type="button" class="btn btn-success" (click)="addDog()">Añadir una nueva raza</button></td>
   </div>
 </body>
 

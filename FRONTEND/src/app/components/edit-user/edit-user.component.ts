@@ -13,28 +13,37 @@ export class EditUserComponent implements OnInit {
 
   constructor(private router: Router, private userService: UserService) { }
 
-  nombre: string = ""
-  apellidos: string = ""
+  name: string = ""
+  lastname: string = ""
   email: string = ""
-  contrasenia: string = ""
+  password: string = ""
   userNoPassword:any=""
 
   ngOnInit(): void {
-    this.editarUsuario()
+    this.editUser()
   }
 
-  editarUsuario() {
+  /**
+   * recoge todos los datos propios del usuario que esta iniciado sesión y los almacena en varibales externas que estan vinculadas 
+   * con el formulario, por lo tanto al abrir el formulario el usuario va a ver sus datos en el, y el decide si quiere cambiar alguno
+   */
+  editUser() {
     const user = this.userService.user
-    this.nombre = user.name
-    this.apellidos = user.lastname
+    this.name = user.name
+    this.lastname = user.lastname
     this.email = user.email
   }
 
-  async cambiarDatos() {
-    if(this.contrasenia==""){
+  /**
+   * Si no quieres cambiar la contraseña no se pasa como parametro para editar el usuario y si quieres editarla tambien se rellena 
+   * el campo y por lo tanto se pasa tambien como dato a cambiar.El resto de campos se pasan siempre, si los cambias se guardarán 
+   * los datos nuevos y si no tocas nada se va a quedar todo como estaba.
+   */
+  async changeData() {
+    if(this.password==""){
       this.userNoPassword={
-        name: this.nombre,
-        lastname: this.apellidos,
+        name: this.name,
+        lastname: this.lastname,
         email: this.email,
         role: 'user'
       }
@@ -59,10 +68,10 @@ export class EditUserComponent implements OnInit {
       })
     }else{
       let user: User = {
-        name: this.nombre,
-        lastname: this.apellidos,
+        name: this.name,
+        lastname: this.lastname,
         email: this.email,
-        password:this.contrasenia,
+        password:this.password,
         role: 'user'
       }
       Swal.fire({
@@ -89,7 +98,10 @@ export class EditUserComponent implements OnInit {
 
   }
 
-  cancelar() {
+  /**
+   * Permite cancelar la operación de cambiar los datos si el usuario cambia de opinión
+   */
+  cancel() {
     Swal.fire({
       title: '¿Estás seguro de volver?',
       icon: 'question',

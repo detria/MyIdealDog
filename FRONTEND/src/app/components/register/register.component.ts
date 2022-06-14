@@ -26,6 +26,9 @@ export class RegisterComponent implements OnInit {
     password: new FormControl('', Validators.required),
   });
 
+  /**
+   * Con los datos obtenidos del formulario realiza el registro del usuario
+   */
   registerUser() {
     this.userService.createUser(this.userForm.value).subscribe(
       res => {

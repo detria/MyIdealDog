@@ -24,15 +24,15 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.obtenerUsuarioLogeado()
+    this.getUserLogged()
   }
 
-  cambiarDatos() {
+  changeData() {
     this.userService.saveDataUser(this.user)
     this.router.navigate(['/editUser'])
   }
 
-  eliminarCuenta(email: string) {
+  deleteAccount(email: string) {
     Swal.fire({
       title: '¿Estás seguro de querer eliminar este usuario?',
       text: "No podrás volver atrás!",
@@ -62,7 +62,7 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
-  async obtenerUsuarioLogeado() {
+  async getUserLogged() {
     const user = await this.userService.getUserById()
     user.forEach(user => this.user = user);
   }

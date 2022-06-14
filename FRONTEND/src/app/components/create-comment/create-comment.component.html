@@ -7,7 +7,7 @@
 					<div class="card-body">
 						<form id="form">
 							<div class="input-group form-group">
-								<select class="form-select" aria-label="dog race" id="breedSelect" [(ngModel)]="opcionSeleccionada" (change)="capturarRaza()" id="tema" name="tema">
+								<select class="form-select" aria-label="dog race" id="breedSelect" [(ngModel)]="selectedOption" (change)="capturarRaza()" id="tema" name="tema">
 									<option value="0" >Seleccione un tema para filtrar</option>
 									<option *ngFor="let breed of breeds">{{breed}}</option>
 								</select>

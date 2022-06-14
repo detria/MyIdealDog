@@ -24,12 +24,16 @@ export class AdminPageComponent implements OnInit {
   dogs: Dog[] = []
 
   ngOnInit(): void {
-    this.obtenerUsuarios()
-    this.obtenerPerros()
+    this.getUsers()
+    this.getDogs()
 
   }
 
-  eliminarUsuario(email: string) {
+  /**
+   * Borra un usuario a través de su email que es único
+   * @param email Recibe el email y borra el usuario que tiene ese email.
+   */
+  deleteUser(email: string) {
     Swal.fire({
       title: '¿Estás seguro de querer eliminar este usuario?',
       text: "No podrás volver atrás!",
@@ -49,7 +53,7 @@ export class AdminPageComponent implements OnInit {
               confirmButtonText: 'OK',
               confirmButtonColor: 'black',
             }).then(() => {
-              this.obtenerUsuarios()
+              this.getUsers()
             })
           },
           err => console.log(err)
@@ -60,7 +64,10 @@ export class AdminPageComponent implements OnInit {
   }
 
 
-  cerrarSesion() {
+  /**
+   * Permite salir de la sesión y con ello eliminar el token actual de inicio de sesión.
+   */
+  closeSesion() {
     Swal.fire({
       title: '¿Estás seguro de querer salir de la sesión?',
       text: "Tendrás que volver a iniciar sesión!",
@@ -78,20 +85,30 @@ export class AdminPageComponent implements OnInit {
     })
   }
 
-  obtenerUsuarios() {
+  /**
+   * Obtiene todos los usuarios de la BBDD
+   */
+  getUsers() {
     this.userService.getUsers().subscribe(
       res => { this.users = res },
       err => console.log(err)
     )
   }
 
-  obtenerPerros() {
+  /**
+   * Obtiene todos los perros de la BBDD
+   */
+  getDogs() {
     this.dogService.getDog().subscribe(
       res => { this.dogs = res },
       err => console.log(err)
     )
   }
 
+  /**
+   * Eliminar el perro a través de la raza pasada por parámetro.
+   * @param breed Se recibe la raza del perro que se quiere eliminar
+   */
   eliminarPerro(breed: string) {
     Swal.fire({
       title: '¿Estás seguro de querer eliminar esta raza?',
@@ -115,7 +132,7 @@ export class AdminPageComponent implements OnInit {
               confirmButtonColor: 'black',
             },
             ).then(() => {
-              this.obtenerPerros()
+              this.getDogs()
             })
           },
           err => console.log(err))
@@ -123,12 +140,19 @@ export class AdminPageComponent implements OnInit {
     })
 
   }
-  async aniadirRaza() {
-    this.dogService.create = true
+  /**
+   * Indica que la operacion que se esta haciendo es crear un perro y no editarlo
+   */
+  async addDog() {
+    this.dogService.create = true //true es crear y false editar
     this.router.navigate(['/createEditDog']);
   }
 
-  async modificarPerro(breed: string) {
+  /**
+   * 
+   * @param breed Edita un perro a través de su raza pasada por parámetro
+   */
+  async editDog(breed: string) {
     this.dogService.create = false
     const dogs = await this.dogService.getDogsBy("getByBreed", breed)
     var dogEdit: Dog = {

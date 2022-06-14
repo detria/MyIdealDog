@@ -7,54 +7,54 @@
       <fieldset>
         <legend >¿Vives en una casa o en un piso?</legend>
         <label>
-          <input type="radio" name="vivienda" value="casa" (click)="cambiarEstadoVivienda('casa')"> Casa
+          <input type="radio" name="vivienda" value="casa" (click)="changeHomeCondition('casa')"> Casa
         </label>
         <label>
-          <input type="radio" name="vivienda" value="piso" (click)="cambiarEstadoVivienda('piso')"> Piso
+          <input type="radio" name="vivienda" value="piso" (click)="changeHomeCondition('piso')"> Piso
         </label>
       </fieldset>
       <fieldset>
         <legend>¿Cuanto tiempo libre tienes para dedicar a tu mascota?</legend>
         <label>
-          <input type="radio" name="horario" value="casa" (click)="cambiarEstadoHorario('1')"> 1 hora aprox
+          <input type="radio" name="horario" value="casa" (click)="changeTimeCondition('1')"> 1 hora aprox
         </label>
         <label>
-          <input type="radio" name="horario" value="negro"  (click)="cambiarEstadoHorario('12')"> Entre 1 y 2 horas
+          <input type="radio" name="horario" value="negro"  (click)="changeTimeCondition('12')"> Entre 1 y 2 horas
         </label>
         <label>
-          <input type="radio" name="horario" value="negro" (click)="cambiarEstadoHorario('2')"> Más de 2 horas
+          <input type="radio" name="horario" value="negro" (click)="changeTimeCondition('2')"> Más de 2 horas
         </label>
       </fieldset>
       <fieldset>
         <legend>¿Tienes niños en casa?</legend>
         <label>
-          <input type="radio" name="compañia" value="si" (click)="cambiarEstadoFamilia('si')"> Si
+          <input type="radio" name="compañia" value="si" (click)="changeFamilyCondition('si')"> Si
         </label>
         <label>
-          <input type="radio" name="compañia" value="no" (click)="cambiarEstadoFamilia('no')"> No
+          <input type="radio" name="compañia" value="no" (click)="changeFamilyCondition('no')"> No
         </label>
       </fieldset>
       <fieldset>
         <legend>
           ¿Podrías permitirte una raza que requiera muchos cuidados?</legend>
         <label>
-          <input type="radio" name="niños" value="si"  (click)="cambiarEstadoCuidados('si')"> Si
+          <input type="radio" name="niños" value="si"  (click)="changeCareRequiremenCondition('si')"> Si
         </label>
         <label>
-          <input type="radio" name="niños" value="no" (click)="cambiarEstadoCuidados('no')"> No
+          <input type="radio" name="niños" value="no" (click)="changeCareRequiremenCondition('no')"> No
         </label>
       </fieldset>
       <fieldset>
         <legend>
           ¿Has tenido algún otro perro anteriormente?</legend>
         <label>
-          <input type="radio" name="perros" value="si"  (click)="cambiarEstadoExperiencia('si')"> Si
+          <input type="radio" name="perros" value="si"  (click)="changeExperienceCondition('si')"> Si
         </label>
         <label>
-          <input type="radio" name="perros" value="no" (click)="cambiarEstadoExperiencia('no')"> No
+          <input type="radio" name="perros" value="no" (click)="changeExperienceCondition('no')"> No
         </label>
       </fieldset>
-      <button type="button" class="btn btn-light" (click)="finalizar()">Finalizar</button>
+      <button type="button" class="btn btn-light" (click)="finish()">Finalizar</button>
     </form>
   </div>
 </body>
