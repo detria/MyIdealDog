@@ -1,12 +1,21 @@
 const User = require('../models/userModel.js')
 const users = {}
-const jwt = require('jsonwebtoken');
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res busca en la base de datos y obtiene todos los usuarios que encuentra y los devuelve
+ */
 users.getUsers = async (req, res) => {
   const users = await User.find()
   res.json(users)
 }
 
+/**
+ * 
+ * @param {*} req recibe los datos necesarios para poder crear un nuevo usuario
+ * @param {*} res asigna los datos a las propiedades del usuario y se crea un nuevo usuario, se devuelve un mensaje de éxito
+ */
 users.createUser = async (req, res) => {
   const bcrypt = require("bcryptjs");
   var rondas = 10;
@@ -18,6 +27,11 @@ users.createUser = async (req, res) => {
   res.json({ status: "Usuario creado con exito" })
 }
 
+/**
+ * 
+ * @param {*} req se recibe por parámetro un email de un usuario
+ * @param {*} res obtiene el usuario cuyo email coincida con el pasado por párametro y si todo va bien devuelve el usuario sino devolvera un mensaje de error
+ */
 users.getUserByEmail = async (req, res) => {
   try {
     const user = await User.findOne({ email: req.params.email })
@@ -27,6 +41,11 @@ users.getUserByEmail = async (req, res) => {
   }
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res obtiene el usuario cuyo id coincida con el id del usuario actual logeado y devuelve el usuario si lo encuentra, si no devolverá un error
+ */
 users.getUserById = async (req, res) => {
   try {
     const user = await User.findById(res.user.userFound._id)
@@ -36,6 +55,12 @@ users.getUserById = async (req, res) => {
   }
 }
 
+/**
+ * 
+ * @param {*} req se recibe el email y contraseña del usuario que esta intentando iniciar sesión
+ * @param {*} res se busca el usuario en la BBDD cuyo email y contraseña coincidan con los pasados por por el req
+ * @returns 
+ */
 users.loginUser = async (req, res) => {
 
   const JWT_Secret = 'your_secret_key';
@@ -67,18 +92,31 @@ users.loginUser = async (req, res) => {
 
 };
 
+/**
+ * 
+ * @param {*} req se recibe un id de usuario por parámetro
+ * @param {*} res se busca el usuario cuyo id sea el mismo que el pasado por parámetro y lo elimina, devuelve un mensaje de éxito
+ */
 users.deleteUser = async (req, res) => {
   await User.findByIdAndDelete(req.params.id)
   res.json({ status: "Usuario eliminado con exito" })
 }
 
+/**
+ * 
+ * @param {*} req se recibe un email de usuario por parámetro
+ * @param {*} res se busca el usuario cuyo email sea el mismo que el pasado por parámetro y lo elimina, devuelve un mensaje de éxito
+ */
 users.deleteUserEmail = async (req, res) => {
-  console.log(req.params.email)
   await User.findOneAndDelete({ email: req.params.email })
-  console.log("eliminado")
   res.json({ status: "Usuario eliminado con exito" })
 }
 
+/**
+ * 
+ * @param {*} req recibe los datos del usuario 
+ * @param {*} res se busca el usuario cuyo id sea el mismo que del usuario actualmente logeado y se asigna a las propiedades de este los nuevos datos actualizados
+ */
 users.editUser = async (req, res) => {
   const bcrypt = require("bcryptjs");
   var rondas = 10;
