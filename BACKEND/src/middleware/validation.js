@@ -16,12 +16,6 @@ validate.validateToken = (req, res, next) => {
     }
 };
 
-/**
- * 
- * @param {*} req recibe el token del usuario 
- * @param {*} res 
- * @param {*} next 
- */
 validate.validateAdmin = (req, res, next) => {
     const accessToken = req.headers.token;
     if (!accessToken) {
