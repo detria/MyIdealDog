@@ -15,14 +15,10 @@ import { CookieService } from 'ngx-cookie-service';
 import { AdminPageComponent } from './components/admin/admin-page/admin-page.component';
 import { NavbarUserComponent } from './components/navbar-user/navbar-user.component';
 import { PageIntroductionComponent } from './components/page-introduction/page-introduction.component';
-import { NavbarForumComponent } from './components/navbar-forum/navbar-forum.component';
 import { ForumComponent } from './components/forum/forum.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule} from '@angular/forms';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import {MatDialogModule} from '@angular/material/dialog';
 import { CreateCommentComponent } from './components/create-comment/create-comment.component';
 import { CreateEditDogComponent } from './components/create-edit-dog/create-edit-dog.component';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -39,7 +35,6 @@ import { EditUserComponent } from './components/edit-user/edit-user.component';
     AdminPageComponent,
     NavbarUserComponent,
     PageIntroductionComponent,
-    NavbarForumComponent,
     ForumComponent,
     UserProfileComponent,
     CreateCommentComponent,
@@ -53,15 +48,11 @@ import { EditUserComponent } from './components/edit-user/edit-user.component';
     FormsModule,
     MatCardModule,
     NoopAnimationsModule,
-    MatAutocompleteModule,
-    MatFormFieldModule,
     ReactiveFormsModule,
-    MatDialogModule,
     MatExpansionModule
 
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],
-  //schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

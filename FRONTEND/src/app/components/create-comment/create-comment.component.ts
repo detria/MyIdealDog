@@ -34,29 +34,39 @@ export class CreateCommentComponent implements OnInit {
    * Crea un comentario y lo introduce a la BBDD
    */
   createComment() {
-    var actualDate = new Date();
-    var options:any = { year: 'numeric', month: 'long', day: 'numeric' };
-    const comment: Comment = {
-      topic: this.topic,
-      comment: this.message,
-      date:  actualDate.toLocaleDateString("es-ES", options),
-      userId: ""
+    if (this.selectedOption == '0' || this.message == "") {
+      Swal.fire({
+        title: 'Por favor rellene todos los campos',
+        icon: 'warning',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ok'
+      })
+    } else {
+      var actualDate = new Date();
+      var options: any = { year: 'numeric', month: 'long', day: 'numeric' };
+      const comment: Comment = {
+        topic: this.topic,
+        comment: this.message,
+        date: actualDate.toLocaleDateString("es-ES", options),
+        userId: ""
+      }
+      this.commentService.createComment(comment).subscribe(
+        res => {
+          Swal.fire({
+            title: 'Su comentario se ha publicado correctamente!',
+            text: '',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: 'black',
+          }).then(() => {
+            this.router.navigate(['/forum']);
+          })
+        },
+        err => console.log(err)
+      )
     }
-    this.commentService.createComment(comment).subscribe(
-      res => {
-        Swal.fire({
-          title: 'Su comentario se ha publicado correctamente!',
-          text: '',
-          background: 'url(assets/imgs/login1.jpg)',
-          icon: 'success',
-          confirmButtonText: 'OK',
-          confirmButtonColor: 'black',
-        }).then(() => {
-          this.router.navigate(['/forum']);
-        })
-      },
-      err => console.log(err)
-    )
+
   }
 
   /**
@@ -83,7 +93,7 @@ export class CreateCommentComponent implements OnInit {
   /**
    * Se recupera la opcion seleccionada por el usuario en el select
    */
-  capturarRaza() {
+  changeBreed() {
     this.topic = this.selectedOption
   }
 }

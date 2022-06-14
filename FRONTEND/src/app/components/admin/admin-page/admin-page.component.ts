@@ -34,32 +34,43 @@ export class AdminPageComponent implements OnInit {
    * @param email Recibe el email y borra el usuario que tiene ese email.
    */
   deleteUser(email: string) {
-    Swal.fire({
-      title: '¿Estás seguro de querer eliminar este usuario?',
-      text: "No podrás volver atrás!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Estoy seguro!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.userService.deleteUser(email).subscribe(
-          res => {
-            Swal.fire({
-              title: 'El usuario se ha eliminado correctamente!',
-              text: '',
-              icon: 'success',
-              confirmButtonText: 'OK',
-              confirmButtonColor: 'black',
-            }).then(() => {
-              this.getUsers()
-            })
-          },
-          err => console.log(err)
-        )
-      }
-    })
+    if(email==="admin"){
+      Swal.fire({
+        title: 'No se puede eliminar al administrador',
+        text: '',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        confirmButtonColor: 'black',
+      })
+    }else{
+      Swal.fire({
+        title: '¿Estás seguro de querer eliminar este usuario?',
+        text: "No podrás volver atrás!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Estoy seguro!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.userService.deleteUser(email).subscribe(
+            res => {
+              Swal.fire({
+                title: 'El usuario se ha eliminado correctamente!',
+                text: '',
+                icon: 'success',
+                confirmButtonText: 'OK',
+                confirmButtonColor: 'black',
+              }).then(() => {
+                this.getUsers()
+              })
+            },
+            err => console.log(err)
+          )
+        }
+      })
+    }
+    
 
   }
 

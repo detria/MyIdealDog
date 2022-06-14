@@ -102,7 +102,6 @@ export class CreateEditDogComponent implements OnInit {
         Swal.fire({
           title: 'Se ha creado una nueva raza!',
           text: '',
-          background: 'url(assets/imgs/login1.jpg)',
           icon: 'success',
           confirmButtonText: 'OK',
           confirmButtonColor: 'black',
@@ -168,7 +167,7 @@ export class CreateEditDogComponent implements OnInit {
       this.dogService.editDog(dog.breed, dog).subscribe(
         res => {
           Swal.fire({
-            title: 'El perro se ha editado correctamente!',
+            title: 'El perro se ha modificado correctamente!',
             text: '',
             background: 'url(assets/imgs/login1.jpg)',
             icon: 'success',

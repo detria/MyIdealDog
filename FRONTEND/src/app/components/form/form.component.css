@@ -1,39 +1,38 @@
-body{
+body,
+html {
 	background-color: rgb(46, 46, 79);
 }
-form{
-	min-width: 400px;
-	min-height: 380px;
-	max-width: 1000px;
-	max-height: 380px;
-	height: auto;
-	margin-top: 30px;
-	margin-bottom: 30px;
+
+form {
+	height: 100%;
 	background-color: rgb(255, 255, 255);
-	position: absolute;
- 	top: 50%;
-  	left: 50%;
-	min-height: 640px;
-  	transform: translate(-50%, -50%);
 	padding: 15px;
 	border-radius: 15px;
+	width: 700px;
+	overflow: hidden;
+	margin-top: 60px;
 }
 
-label{
+label {
 	margin: 15px;
 }
-legend{
-	margin-top: 18px;
-	font-size: 20px;
-	
+
+legend {
+	margin-top: 25px;
+	font-size: 2wpx;
+
 }
 
-button{
+button {
 	margin: 10px;
 }
 
 
-  .container{
-	  min-height: 100vh;
-  }
+.container {
+	min-height: 100vh;
+	padding: 40px;
 
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

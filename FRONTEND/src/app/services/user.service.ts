@@ -30,7 +30,7 @@ export class UserService {
 
   };
 
-  constructor(private http: HttpClient,private cookies:CookieService) { }
+  constructor(private http: HttpClient) { }
 
   getUsers() {  
     const httpOptions = {

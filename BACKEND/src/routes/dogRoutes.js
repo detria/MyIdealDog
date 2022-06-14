@@ -1,7 +1,6 @@
 const{Router} =require('express')
 const router=Router()
 const dogsController=require('../controllers/dogController.js');
-const { validateToken } = require('../middleware/validation.js');
 const  validate  = require('../middleware/validation.js');
 
 router.get('/list',validate.validateToken, dogsController.getDogs);

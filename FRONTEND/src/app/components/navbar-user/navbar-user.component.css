@@ -46,11 +46,3 @@ a {
   border-radius: 2em;
 }
 
-
-/* Color de activado del link */
-.navbar-nav li.active a {
-  color: rgb(255, 0, 0);
-  background-color: #e00000;
-  border-radius: 2em;
-}
-

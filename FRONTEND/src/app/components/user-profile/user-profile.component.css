@@ -6,7 +6,7 @@ img {
     height: auto;
 }
 
-#botonVolver{
+#botonVolver {
     color: black;
     width: 100px;
     height: 40px;
@@ -43,12 +43,13 @@ button {
     font-weight: bold;
 }
 
-#tableUser{
+#tableUser {
     border-style: solid;
     width: 90%;
     align-self: center;
     border-color: rgb(118, 118, 165);
-    background-color: rgb(118, 118, 165);;
+    background-color: rgb(118, 118, 165);
+    ;
 }
 
 #title {
@@ -70,5 +71,5 @@ button {
 
 .container {
     background-color: rgb(46, 46, 79);
-
+    padding-bottom: 30px;
 }
