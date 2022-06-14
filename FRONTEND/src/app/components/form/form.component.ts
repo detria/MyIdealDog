@@ -74,7 +74,7 @@ export class FormComponent implements OnInit {
    * Método que asigna una raza al usuario logeado una vez complete el cuestionario, recoge los resultados marcados en el formulario y según estos va filtrando para encontrar una raza que se adapte a las preferencias y características del usuario
    * @returns devuelve una lista con las razas encontradas más afines al usuario(si no se encuentra ninguna se devolverá vacío)
    */
-   idealDogAssignment(): any {
+  idealDogAssignment(): any {
     if (this.careRequiremenCondition == "" || this.experienceCondition == "" || this.familyCondition == "" || this.timeCondition == "" || this.homeCondition == "") {
       Swal.fire({
         title: '¡Debe marcar todas las opciones para poder continuar!',
@@ -88,43 +88,43 @@ export class FormComponent implements OnInit {
       })
     } else {
       if (this.homeCondition == "piso") {
-        this.dogs.filter(e => e.size === 'mini').forEach(perro => this.idealDogs.push(perro));
+        this.dogs.filter(dog => dog.size === 'mini').forEach(dog => this.idealDogs.push(dog));
         this.getDogs()
-        this.dogs.filter(e => e.size === 'pequeño').forEach(perro => this.idealDogs.push(perro));
+        this.dogs.filter(dog => dog.size === 'pequeño').forEach(dog => this.idealDogs.push(dog));
       } else {
-        this.dogs.filter(e => e.size === 'mediano').forEach(perro => this.idealDogs.push(perro));
+        this.dogs.filter(dog => dog.size === 'mediano').forEach(dog => this.idealDogs.push(dog));
         this.getDogs()
-        this.dogs.filter(e => e.size === 'grande').forEach(perro => this.idealDogs.push(perro));
+        this.dogs.filter(dog => dog.size === 'grande').forEach(dog => this.idealDogs.push(dog));
       }
 
       if (this.familyCondition === 'si') {
         let aux: Dog[] = []
-        this.idealDogs.filter(e => e.activity === 'baja').forEach(perro => aux.push(perro));
-        this.idealDogs.filter(e => e.activity === 'media').forEach(perro => aux.push(perro));
+        this.idealDogs.filter(dog => dog.activity === 'baja').forEach(dog => aux.push(dog));
+        this.idealDogs.filter(dog => dog.activity === 'media').forEach(dog => aux.push(dog));
         this.idealDogs = aux
       } else if (this.familyCondition === 'no') {
-        this.idealDogs = this.idealDogs.filter(e => e.activity === 'alta')
+        this.idealDogs = this.idealDogs.filter(dog => dog.activity === 'alta')
       }
 
       if (this.timeCondition === '1') {
         this.idealDogs = this.idealDogs.filter(e => e.activity === 'baja');
       } else if (this.timeCondition === '12') {
         let aux: Dog[] = []
-        this.idealDogs.filter(e => e.activity === 'media').forEach(perro => aux.push(perro));
-        this.idealDogs.filter(e => e.activity === 'baja').forEach(perro => aux.push(perro));
+        this.idealDogs.filter(dog => dog.activity === 'media').forEach(dog => aux.push(dog));
+        this.idealDogs.filter(dog => dog.activity === 'baja').forEach(dog => aux.push(dog));
         this.idealDogs = aux
       } else if (this.timeCondition === '2') {
         let aux: Dog[] = []
-        this.idealDogs.filter(e => e.activity === 'alta').forEach(perro => aux.push(perro));
-        this.idealDogs.filter(e => e.activity === 'baja').forEach(perro => aux.push(perro));
-        this.idealDogs.filter(e => e.activity === 'media').forEach(perro => aux.push(perro));
+        this.idealDogs.filter(dog => dog.activity === 'alta').forEach(dog => aux.push(dog));
+        this.idealDogs.filter(dog => dog.activity === 'baja').forEach(dog => aux.push(dog));
+        this.idealDogs.filter(dog => dog.activity === 'media').forEach(dog => aux.push(dog));
         this.idealDogs = aux
       }
 
       if (this.experienceCondition === 'no') {
         var aux: Dog[] = []
-        this.idealDogs.filter(e => e.activity === 'baja').forEach(perro => aux.push(perro));
-        this.idealDogs.filter(e => e.activity === 'media').forEach(perro => aux.push(perro));
+        this.idealDogs.filter(dog => dog.activity === 'baja').forEach(dog => aux.push(dog));
+        this.idealDogs.filter(dog => dog.activity === 'media').forEach(dog => aux.push(dog));
         this.idealDogs = aux
       } else if (this.experienceCondition === 'si') {
         this.idealDogs = this.idealDogs.filter(e => e.activity === 'alta')
@@ -132,8 +132,8 @@ export class FormComponent implements OnInit {
 
       if (this.careRequiremenCondition === 'no') {
         var aux: Dog[] = []
-        this.idealDogs.filter(e => e.care_requirement === 'bajo').forEach(perro => aux.push(perro));
-        this.idealDogs.filter(e => e.care_requirement === 'medio').forEach(perro => aux.push(perro));
+        this.idealDogs.filter(dog => dog.care_requirement === 'bajo').forEach(dog => aux.push(dog));
+        this.idealDogs.filter(dog => dog.care_requirement === 'medio').forEach(dog => aux.push(dog));
         this.idealDogs = aux
       } else if (this.careRequiremenCondition === 'si') {
         this.idealDogs = this.idealDogs.filter(e => e.care_requirement === 'alto')

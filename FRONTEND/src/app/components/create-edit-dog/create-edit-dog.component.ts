@@ -119,10 +119,8 @@ export class CreateEditDogComponent implements OnInit {
    */
   saveChanges() {
     if (this.dogService.create === false) {
-      console.log(this.dogService.create)
       this.editDog()
     } else if (this.dogService.create === true) {
-      console.log(this.dogService.create)
       this.createDog()
     }
   }
