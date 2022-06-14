@@ -17,7 +17,7 @@ export class CreateEditDogComponent implements OnInit {
   ngOnInit(): void {
     var btn = document.getElementById('guardar')
     if (this.dogService.create === false) {
-      this.cargarRazaEditar()
+      this.loadDogEdit()
       if (btn != null) {
         btn.innerHTML = 'Editar'
         let inputBreed= document.getElementById('raza')
@@ -32,49 +32,67 @@ export class CreateEditDogComponent implements OnInit {
 
   editar: boolean | undefined
 
-  raza: string = ""
-  descripcion: string = ""
-  peso: string = ""
+  breed: string = ""
+  description: string = ""
+  weight: string = ""
   video: string = ""
   tutorial: string = ""
-  foto1: string = ""
-  foto2: string = ""
-  esperanzaVida: string = ""
+  photo1: string = ""
+  photo2: string = ""
+  lifeExpectancy: string = ""
 
-  opcionSeleccionadaTamanio: string = '0';
-  seleccionTamanio: string = ""
+  selectedOptionSize: string = '0';
+  selectedSize: string = ""
 
-  opcionSeleccionadaActividad: string = '0'
-  seleccionActividad: string = ""
+  selectedOptionActivity: string = '0'
+  selectedActivity: string = ""
 
-  opcionSeleccionadaCuidados: string = '0'
-  seleccionCuidados: string = ""
+  selectedOptionCareRequirement: string = '0'
+  selectedCareRequirement: string = ""
 
-  capturarTamanio() {
-    this.seleccionTamanio = this.opcionSeleccionadaTamanio;
-  }
-
-  capturarActividad() {
-    this.seleccionActividad = this.opcionSeleccionadaActividad;
-  }
-
-  capturarCuidados() {
-    this.seleccionCuidados = this.opcionSeleccionadaCuidados;
+  /**
+   * Asigna y recoge el valor seleccionado por el usuario en el select de tamaño
+   */
+  changeSize() {
+    this.selectedSize = this.selectedOptionSize;
   }
 
   /**
-   * Recoge las propiedades escritar por el administrador y con ellas se crea una nueva raza de perro.
+   * Asigna y recoge el valor seleccionado por el usuario en el select de actividad
    */
-  crearNuevaRaza() {
-    let imgs: string[] = [this.foto1, this.foto2]
+  changeActivity() {
+    this.selectedActivity = this.selectedOptionActivity;
+  }
+
+  /**
+   * Asigna y recoge el valor seleccionado por el usuario en el select de cuidados
+   */
+  changeCareRequirement() {
+    this.selectedCareRequirement = this.selectedOptionCareRequirement;
+  }
+
+  /**
+   * Recoge  las propiedades escritar por el administrador y con ellas se crea una nueva raza de perro.
+   */
+  createDog() {
+    if(this.breed=="" || this.description=="" || this.weight=="" ||this.selectedActivity==""||this.selectedCareRequirement=="" ||this.lifeExpectancy=="" ||this.photo1=="" ||this.photo2=="" ||this.video==""||this.tutorial==""){
+      Swal.fire({
+        title: 'Por favor rellene todos los campos',
+        icon: 'warning',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ok'
+      })
+    }else{
+    let imgs: string[] = [this.photo1, this.photo2]
     let dog: Dog = {
-      breed: this.raza,
-      description: this.descripcion,
-      weight: this.peso,
-      activity: this.seleccionActividad,
-      care_requirement: this.seleccionCuidados,
-      life_expectancy: this.esperanzaVida,
-      size: this.seleccionTamanio,
+      breed: this.breed,
+      description: this.description,
+      weight: this.weight,
+      activity: this.selectedActivity,
+      care_requirement: this.selectedCareRequirement,
+      life_expectancy: this.lifeExpectancy,
+      size: this.selectedSize,
       imgs: imgs,
       trainingTutorial: this.tutorial,
       video: this.video
@@ -94,72 +112,77 @@ export class CreateEditDogComponent implements OnInit {
       },
       err => console.log(err)
     )
-
+    }
   }
 
   /**
    * Dependiendo si estas creando una raza o editando una ejecuta una serie de instrucciones u otras.
    */
-  guardarCambios() {
+  saveChanges() {
     if (this.dogService.create === false) {
       console.log(this.dogService.create)
-      this.editarPerro()
+      this.editDog()
     } else if (this.dogService.create === true) {
       console.log(this.dogService.create)
-      this.crearNuevaRaza()
+      this.createDog()
     }
   }
 
   /**
    * Carga las características de la raza de perro que en la anterior ventana se escogió editar.
    */
-  async cargarRazaEditar() {
+  async loadDogEdit() {
     let dog: Dog = await this.dogService.dog
-    this.raza = dog.breed
-    this.descripcion = dog.description
-    this.opcionSeleccionadaActividad = dog.activity
-    this.esperanzaVida = dog.life_expectancy
-    this.opcionSeleccionadaCuidados = dog.care_requirement
-    this.opcionSeleccionadaTamanio = dog.size
-    this.foto1 = dog.imgs[0]
-    this.foto2 = dog.imgs[1]
+    this.breed = dog.breed
+    this.description = dog.description
+    this.selectedOptionActivity = dog.activity
+    this.lifeExpectancy = dog.life_expectancy
+    this.selectedOptionCareRequirement = dog.care_requirement
+    this.selectedOptionSize = dog.size
+    this.photo1 = dog.imgs[0]
+    this.photo2 = dog.imgs[1]
     this.video = dog.video
     this.tutorial = dog.trainingTutorial
-    this.peso = dog.weight
+    this.weight = dog.weight
   }
 
   /**
    * Recoge todas las propiedades y si se editó alguna guarda la raza editada
    */
-  editarPerro() {
+  editDog() {
+    
     let dog: Dog = {
-      breed: this.raza,
-      description: this.descripcion,
-      weight: this.peso,
-      activity: this.opcionSeleccionadaActividad,
-      care_requirement: this.opcionSeleccionadaCuidados,
-      life_expectancy: this.esperanzaVida,
-      imgs: [this.foto1, this.foto2],
+      breed: this.breed,
+      description: this.description,
+      weight: this.weight,
+      activity: this.selectedOptionActivity,
+      care_requirement: this.selectedOptionCareRequirement,
+      life_expectancy: this.lifeExpectancy,
+      imgs: [this.photo1, this.photo2],
       trainingTutorial: this.tutorial,
       video: this.video,
-      size: this.opcionSeleccionadaTamanio
+      size: this.selectedOptionSize
     }
 
-    this.dogService.editDog(dog.breed, dog).subscribe(
-      res => {
-        Swal.fire({
-          title: 'El perro se ha editado correctamente!',
-          text: '',
-          background: 'url(assets/imgs/login1.jpg)',
-          icon: 'success',
-          confirmButtonText: 'OK',
-          confirmButtonColor: 'black',
-        }).then(() => {
-          this.router.navigate(['/admin']);
-        })
-      },
-      err => console.log(err)
-    )
+    
+      this.dogService.editDog(dog.breed, dog).subscribe(
+        res => {
+          Swal.fire({
+            title: 'El perro se ha editado correctamente!',
+            text: '',
+            background: 'url(assets/imgs/login1.jpg)',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: 'black',
+          }).then(() => {
+            this.router.navigate(['/admin']);
+          })
+        },
+        err => console.log(err)
+      )
+    
+
+    
   }
 
 }

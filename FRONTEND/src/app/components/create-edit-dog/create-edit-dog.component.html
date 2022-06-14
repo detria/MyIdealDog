@@ -10,22 +10,22 @@
                         <div class="input-group form-group">
                             Raza:
                             <input type="text" name="breed" class="form-control" id="raza"
-                                placeholder="Introduce la raza"  [(ngModel)]="raza">
+                                placeholder="Introduce la raza"  [(ngModel)]="breed">
                         </div>
                         <div class="input-group form-group">
                             Descripción:
                             <input type="text" name="description" class="form-control" id="descripcion"
-                                placeholder="Introduce una descripción"  [(ngModel)]="descripcion">
+                                placeholder="Introduce una descripción"  [(ngModel)]="description">
                         </div>
                         <div class="input-group form-group">
                             Peso:
                             <input type="text" name="weight" class="form-control" id="peso"
-                                placeholder="Introduce el peso"  [(ngModel)]="peso" >
+                                placeholder="Introduce el peso"  [(ngModel)]="weight" >
                         </div>
                         <div class="input-group form-group">
                             Actividad:
                             <select class="form-select" name="activity" id="activity"
-                                [(ngModel)]="opcionSeleccionadaActividad" (change)="capturarActividad()"
+                                [(ngModel)]="selectedOptionActivity" (change)="changeActivity()"
                                 >
                                 <option value="0">Seleccione el nivel de actividad</option>
                                 <option>baja</option>
@@ -36,7 +36,7 @@
                         <div class="input-group form-group">
                             Requerimiento de cuidados:
                             <select class="form-select" id="care_requirement"
-                                [(ngModel)]="opcionSeleccionadaCuidados" (change)="capturarCuidados()" 
+                                [(ngModel)]="selectedOptionCareRequirement" (change)="changeCareRequirement()" 
                                 name="care_requirement">
                                 <option value="0">Seleccione el nivel de requerimiento de cuidados</option>
                                 <option>bajo</option>
@@ -47,12 +47,12 @@
                         <div class="input-group form-group">
                             Esperanza de vida:
                             <input type="text" name="life_expentancy" class="form-control" id="esperanzaVida"
-                                placeholder="Introduce la esperanza de vida"  [(ngModel)]="esperanzaVida">
+                                placeholder="Introduce la esperanza de vida"  [(ngModel)]="lifeExpectancy">
                         </div>
                         <div class="input-group form-group">
                             Tamaño:
                             <select class="form-select"  id="tamaño"
-                                [(ngModel)]="opcionSeleccionadaTamanio" (change)="capturarTamanio()" 
+                                [(ngModel)]="selectedOptionSize" (change)="changeSize()" 
                                 name="size">
                                 <option value="0">Seleccione el tamaño</option>
                                 <option>mini</option>
@@ -64,9 +64,9 @@
                         <div class="input-group form-group">
                             Fotos:(MÁX 2)
                             <input type="text" name="imgs1" class="form-control" id="foto1"
-                                placeholder="Introduce la url de la primera foto"  [(ngModel)]="foto1">
+                                placeholder="Introduce la url de la primera foto"  [(ngModel)]="photo1">
                             <input type="text" name="imgs2" class="form-control" id="foto2"
-                                placeholder="Introduce la url de la segunda foto"  [(ngModel)]="foto2">
+                                placeholder="Introduce la url de la segunda foto"  [(ngModel)]="photo2">
                         </div>
                         <div class="input-group form-group">
                             Tutorial de entrenamiento:
@@ -79,7 +79,7 @@
                                 placeholder="Introduce la url del video"  [(ngModel)]="video">
                         </div>
                         <div class="form-group">
-                            <button type="submit" value="publicar" class="btn btn-success" id="guardar" (click)="guardarCambios()"></button>
+                            <button type="submit" value="publicar" class="btn btn-success" id="guardar" (click)="saveChanges()"></button>
                             <button type="submit" value="cancelar" class="btn btn-danger"
                                 routerLink="/admin">Cancelar</button>
                         </div>

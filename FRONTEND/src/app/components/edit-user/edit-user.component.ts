@@ -23,6 +23,7 @@ export class EditUserComponent implements OnInit {
     this.editUser()
   }
 
+
   /**
    * recoge todos los datos propios del usuario que esta iniciado sesión y los almacena en varibales externas que estan vinculadas 
    * con el formulario, por lo tanto al abrir el formulario el usuario va a ver sus datos en el, y el decide si quiere cambiar alguno
@@ -40,60 +41,71 @@ export class EditUserComponent implements OnInit {
    * los datos nuevos y si no tocas nada se va a quedar todo como estaba.
    */
   async changeData() {
-    if(this.password==""){
-      this.userNoPassword={
-        name: this.name,
-        lastname: this.lastname,
-        email: this.email,
-        role: 'user'
-      }
+    if(this.name==="" ||this.lastname===""|| this.email===""){
       Swal.fire({
-        title: '¿Estás seguro de los cambios?',
+        title: 'Por favor rellene todos los campos',
         icon: 'warning',
-        showCancelButton: true,
-        cancelButtonText: "Cancelar",
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Estoy seguro!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.userService.editUser(this.userNoPassword).subscribe(
-            res => {
-              this.router.navigate(['/userProfile'])
-            },
-            err => console.log(err)
-          )
-  
-        }
+        confirmButtonText: 'Ok'
       })
     }else{
-      let user: User = {
-        name: this.name,
-        lastname: this.lastname,
-        email: this.email,
-        password:this.password,
-        role: 'user'
-      }
-      Swal.fire({
-        title: '¿Estás seguro de los cambios?',
-        icon: 'warning',
-        showCancelButton: true,
-        cancelButtonText: "Cancelar",
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Estoy seguro!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.userService.editUser(user).subscribe(
-            res => {
-              this.router.navigate(['/userProfile'])
-            },
-            err => console.log(err)
-          )
-  
+      if(this.password==""){
+        this.userNoPassword={
+          name: this.name,
+          lastname: this.lastname,
+          email: this.email,
+          role: 'user'
         }
-      })
+        Swal.fire({
+          title: '¿Estás seguro de los cambios?',
+          icon: 'warning',
+          showCancelButton: true,
+          cancelButtonText: "Cancelar",
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Estoy seguro!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.userService.editUser(this.userNoPassword).subscribe(
+              res => {
+                this.router.navigate(['/userProfile'])
+              },
+              err => console.log(err)
+            )
+    
+          }
+        })
+      }else{
+        let user: User = {
+          name: this.name,
+          lastname: this.lastname,
+          email: this.email,
+          password:this.password,
+          role: 'user'
+        }
+        Swal.fire({
+          title: '¿Estás seguro de los cambios?',
+          icon: 'warning',
+          showCancelButton: true,
+          cancelButtonText: "Cancelar",
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Estoy seguro!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.userService.editUser(user).subscribe(
+              res => {
+                this.router.navigate(['/userProfile'])
+              },
+              err => console.log(err)
+            )
+    
+          }
+        })
+      }
     }
+    
     
 
   }
