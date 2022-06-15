@@ -9,26 +9,29 @@
             <div class="card-body">
                 <h2 class="card-title" [attr.data-user]="user">{{user.name}}</h2>
             </div>
-            <table class="table" id="tableUser">
-                <thead>
-                    <tr>
-                        <th scope="col">Nombre</th>
+            <table class="table table-striped" id="tableUser">
+                <thead class="thead-white">
+                  <tr>
+                    <th scope="col">Nombre</th>
                         <th scope="col">Apellidos</th>
                         <th scope="col">Email</th>
-                    </tr>
+                  </tr>
                 </thead>
-                <tbody>
+                <tbody id=body_table >
                     <td id="name">{{user.name}}</td>
                     <td id="lastname">{{user.lastname}}</td>
                     <td id="email">{{user.email}}</td>
-            </table>
-            <li class="list-group-item"><button type="button" class="btn btn-success" (click)="changeData()">✎ Modificar datos
+                </tbody>
+              </table>
+              <li class="list-group-item"><button type="button" class="btn btn-success" (click)="changeData()">✎ Modificar datos
             </button></li>
             <li class="list-group-item"><button type="button" class="btn btn-danger" id="eliminar" (click)="deleteAccount(user.email)">✘ Eliminar
                     cuenta</button></li>
+            </div>
+            
 
         </div>
-    </div>
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
