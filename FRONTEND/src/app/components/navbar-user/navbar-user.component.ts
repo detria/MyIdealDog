@@ -18,9 +18,20 @@ export class NavbarUserComponent implements OnInit {
    * Cierra sesión y elimina el token actual que pertenece al usuario actual logeado
    */
   cerrarSesion(){
+    Swal.fire({
+      title: '¿Estás seguro de querer cerrar sesión',
+      text: "Tendrás que volver a iniciar sesión!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Estoy seguro!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem('token')
+      this.router.navigate(['/introduction']);
+      }})
     
-    localStorage.removeItem('token')
-    this.router.navigate(['/introduction']);
   }
 
 }

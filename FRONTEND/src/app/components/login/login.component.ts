@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
       password: this.password
     }).subscribe(
       async res => {
-        console.log(res)
         const resp:any=res;
         if (res) {
           Swal.fire({

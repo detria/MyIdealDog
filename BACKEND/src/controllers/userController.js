@@ -87,7 +87,6 @@ users.loginUser = async (req, res) => {
     }
 
   } catch (error) {
-    console.log(error)
     return res.status(404).json({ message: 'There was a problem logging a user' });
   }
 
@@ -113,6 +112,7 @@ users.deleteUserEmail = async (req, res) => {
   res.json({ status: "Usuario eliminado con exito" })
 }
 
+
 /**
  * 
  * @param {*} req recibe los datos del usuario 
@@ -121,18 +121,15 @@ users.deleteUserEmail = async (req, res) => {
 users.editUser = async (req, res) => {
   const bcrypt = require("bcryptjs");
   var rondas = 10;
-  console.log(req.body.password)
   if (typeof (req.body.password) != 'undefined') {
     const contraseñaEncriptada = await bcrypt.hash(req.body.password, rondas);
     req.body.password = contraseñaEncriptada
-    console.log(req.body.password )
-    const userFound = await User.findOneAndUpdate({ _id: res.user.userFound._id },{name:req.body.name,lastname:req.body.lastname,email:req.body.email,password:req.body.password})
+    const userFound = await User.findOneAndUpdate({ _id: res.user.userFound._id }, { name: req.body.name, lastname: req.body.lastname, email: req.body.email, password: req.body.password })
 
-  }else{
-    const userFound = await User.findOneAndUpdate({ _id: res.user.userFound._id },{name:req.body.name,lastname:req.body.lastname,email:req.body.email})
+  } else {
+    const userFound = await User.findOneAndUpdate({ _id: res.user.userFound._id }, { name: req.body.name, lastname: req.body.lastname, email: req.body.email })
 
   }
-  
 
   res.json({ status: "Usuario modificado con exito" })
 }

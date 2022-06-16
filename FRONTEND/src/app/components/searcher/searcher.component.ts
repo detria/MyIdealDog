@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, APP_BOOTSTRAP_LISTENER, Component, OnInit } from '@angular/core';
+import {  Component, OnInit } from '@angular/core';
 import { DogService } from '../../services/dog.service';
 import { Dog } from '../../models/dog';
 

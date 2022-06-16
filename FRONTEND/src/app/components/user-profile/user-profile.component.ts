@@ -48,7 +48,6 @@ export class UserProfileComponent implements OnInit {
             Swal.fire({
               title: 'El usuario se ha eliminado correctamente!',
               text: '',
-              background: 'url(assets/imgs/login1.jpg)',
               icon: 'success',
               confirmButtonText: 'OK',
               confirmButtonColor: 'black',
