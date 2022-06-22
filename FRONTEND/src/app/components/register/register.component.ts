@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
           err => console.log(err)
         )
         Swal.fire({
-          title: 'User registered!',
+          title: 'Usuario registrado!',
           text: '',
           icon: 'success',
           confirmButtonText: 'OK'
